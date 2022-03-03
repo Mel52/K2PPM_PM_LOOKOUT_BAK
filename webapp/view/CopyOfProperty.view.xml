@@ -1,0 +1,101 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.Property"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	busyIndicatorDelay="0"
+	>
+	<Page id="propertyPage" title="Property Page"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding k2pPage">
+		<content>
+			<IconTabBar id = "idIconTabBar">
+				<items>
+					<IconTabFilter id="idTab1" text="Property Details" class="k2pPanel" >
+						<l:VerticalLayout>
+							<l:HorizontalLayout>
+								<Text
+									xmlns="sap.m" text="Address Search" class="sapUiSmallMargin" visible="true" width="120px"/>
+									<Input value="5629 Harrington Falls Ln" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+									<Button text="Search" width="100px" id="btnSearch" icon="sap-icon://search"  visible="true"/>
+								</l:HorizontalLayout>
+								<l:HorizontalLayout>
+									<Text
+										xmlns="sap.m" text="Key Location" class="sapUiSmallMargin" visible="true" width="120px"/>
+										<Input value="Lockbox side door code:25647" valueLiveUpdate="true" width="300px" enabled="true" visible="true"/>
+									</l:HorizontalLayout>
+									<l:HorizontalLayout>
+										<Text
+											xmlns="sap.m" text="Neighborhood" class="sapUiSmallMargin" visible="true" width="120px"/>
+											<Input value="Alexandria" valueLiveUpdate="true" width="400px" enabled="true" visible="true"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text
+												xmlns="sap.m" text="Property Type" class="sapUiSmallMargin" visible="true" width="120px"/>
+												<Input value="Town House" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text
+													xmlns="sap.m" text="Service" class="sapUiSmallMargin" visible="true" width="120px"/>
+													<Input value="Leasing and Management" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+												</l:HorizontalLayout>
+												<l:HorizontalLayout>
+													<Text
+														xmlns="sap.m" text="Phase" class="sapUiSmallMargin" visible="true" width="120px"/>
+														<Input value="management" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+													</l:HorizontalLayout>
+													<l:HorizontalLayout>
+														<Text
+															xmlns="sap.m" text="Straight to management" class="sapUiSmallMargin" visible="true" width="120px"/>
+															<Input value="No" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+														</l:HorizontalLayout>
+														<l:HorizontalLayout>
+															<Text
+																xmlns="sap.m" text="Active" class="sapUiSmallMargin" visible="true" width="120px"/>
+																<Input value="Yes" valueLiveUpdate="true" width="100px" enabled="true" visible="true"/>
+															</l:HorizontalLayout>
+															<l:HorizontalLayout>
+																<Text
+																	xmlns="sap.m" text="HOA" class="sapUiSmallMargin" visible="true" width="120px"/>
+																	<Input value="Harrington Falls Lane" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+																</l:HorizontalLayout>
+																<l:HorizontalLayout>
+																	<Text
+																		xmlns="sap.m" text="Baths" class="sapUiSmallMargin" visible="true" width="120px"/>
+																		<Input value="2.5" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+																	</l:HorizontalLayout>
+																	<l:HorizontalLayout>
+																		<Text
+																			xmlns="sap.m" text="Beds" class="sapUiSmallMargin" visible="true" width="120px"/>
+																			<Input value="3" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+																		</l:HorizontalLayout>
+																		<l:HorizontalLayout>
+																			<Text
+																				xmlns="sap.m" text="Proposed Rent" class="sapUiSmallMargin" visible="true" width="120px"/>
+																				<Input value="$2,500.00" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+																			</l:HorizontalLayout>
+																			<l:HorizontalLayout>
+																				<Text
+																					xmlns="sap.m" text="Date Available" class="sapUiSmallMargin" visible="true" width="120px"/>
+																					<Input value="2019-10-01" valueLiveUpdate="true" width="200px" enabled="true" visible="true"/>
+																				</l:HorizontalLayout>
+																			</l:VerticalLayout>
+																		</IconTabFilter>
+																		<IconTabFilter id="idTab2" text="Pictures" >
+																			<f:SimpleForm id="idSimpleFormChange" title = "Pictures" class="k2pPanel">
+																				<f:content>
+																					<VBox>
+																						<Image id="Image11" src="./webapp/images/Buildings.jpg" width="200em" height="200em" class="sapUiResponsiveMargin" visible="true"/>
+																																											<Button text="Manage Pictures" width="300px" id="btnPhoto" icon="sap-icon://add-photo" press="onSubmit" visible="true"/>
+																					</VBox>
+																				</f:content>
+																			</f:SimpleForm>
+																		</IconTabFilter>
+																	</items>
+																</IconTabBar>
+																<Panel id="pnlProperty" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="Property"></Panel>
+															</content>
+														</Page>
+													</mvc:View>

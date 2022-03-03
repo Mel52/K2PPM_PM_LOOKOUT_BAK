@@ -1,0 +1,219 @@
+<mvc:View controllerName="K2PPM_PM.controller.ApproverList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="RequestListPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<!-- mode="SingleSelect" includeItemInSelection="false"
+			mode="MultiSelect" includeItemInSelection="true" 
+								    templateShareable: true,
+								    class="sapUiResponsiveMargin" 
+								    
+			items="{
+					    path: '/UDO_K2P_APRV_USERS', 
+					    parameters: {$$updateGroupId : 'approverList', $filter : 'DocNum eq -1'}, 
+					    templateShareable: true,
+						events: {dataReceived : '.onDataReceived', change: '.onDataChange', DataStateChange: '.onDataStateChange'}
+						}" >
+			-->
+				<Panel id="pnlApproved" width="auto" visible="true" headerText="Approvers"  expandable="false" expanded="true">
+					<Table id="idMainTable" inset="false" mode="None" includeItemInSelection="false" selectionChange="onSelectionChange"
+					items="{ path: 'approverList>/value'}" >
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<!--<Title text="{i18n>approvers}" level="H2"/>-->
+									<Input id="property"
+    								value="{local>/propertyName}" 
+									placeholder="{i18n>property}"
+									textFormatMode="Value"
+                                    showSuggestion="true"
+                                    showValueHelp="false"
+			                        valueHelpRequest=".onValueHelpRequestx"
+                                    width="200px"
+                                    maxSuggestionWidth = "60em"
+                                    suggestionRows="{path: '/UDO_K2P_PROPERTY', parameters: {$select : 'Name,Code,U_ProjCode',$orderby : 'Name'}}"
+                                    suggestionItemSelected=".onSuggestionItemSelectedProperty"
+                                    >
+										<suggestionColumns>
+											<Column>
+												<Label text="Property" />
+											</Column>
+											<Column>
+												<Label text="Code" />
+											</Column>
+											<Column visible="false">
+												<Label text="Project" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{Name}" />
+												<Label text="{Code}" />
+												<Label text="{U_ProjCode}"  visible="false"/>
+											</ColumnListItem>
+										</suggestionRows>
+									</Input>
+									<Select 	
+										    width="20em"
+									        id="Project1" 
+									        selectedKey="{local>/project}"   
+									        editable="true" 
+									        showSecondaryValues= "true"
+ 								            items="{path: '/ProjectManagements', parameters : {$filter : 'U_K2P_DIM3 eq \'xyZ!\'' }, templateShareable: false}"
+						                    change=".onProject1Change"
+									    >
+										<core:ListItem key="{FinancialProject}" text="{ProjectName}"  additionalText="{FinancialProject}"/>
+									</Select>
+									<Select id="Ladder" 
+									    forceSelection="false"
+									    selectedKey="{local>/ladder}"
+                                        items="{path: '/UDO_K2P_APRV_LADDER', sorter: { path: 'Code' }}"
+	                                       >
+										<core:Item key="{Code}" text="{Code}" />
+									</Select>
+									<Button text="{i18n>refreshButtonText}" id="btnRefresh" icon="sap-icon://refresh" press="onRefresh"/>
+									<ToolbarSpacer/>
+									<Button text="{i18n>AddItemButtonText}"  id="btnAddItem" icon="sap-icon://add" press="onAddItem" visible="true" class="sapUiResponsiveMargin"/>
+									<Button text="{i18n>saveButtonText}"  id="btnSubmit" icon="sap-icon://save" press="updateServer" visible="true" class="sapUiResponsiveMargin"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="18em">
+								<Text text="{i18n>userName}"/>
+							</Column>
+
+							<Column width="16em">
+								<Text text="{i18n>role}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>enabled}"/>
+							</Column>
+							<Column width="12em">
+								<Text text="{i18n>expires}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>ladder}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>property}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>project}"/>
+							</Column>
+							<Column width="80px"></Column>
+							<Column width="120px" visible="false">
+								<Text text="User Code"/>
+							</Column>
+							<Column width="5px" visible="false">
+								<Text text="Id"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem id="ColumnListItemUsers">
+								<cells>
+									<Input id="UserName"
+									width="16em"
+									value="{path: 'approverList>U_UserName',targetType: 'any'}"
+									placeholder="Enter User"
+									showSuggestion="true"
+                                    showValueHelp="false"
+                                    valueHelpRequest=".onValueHelpRequestUser"
+                                    suggestionRows="{path: '/Users', parameters: {$select : 'UserName,UserCode'}, templateShareable: false}"
+                                    suggestionItemSelected=".onSuggestionItemSelectedUser"
+                                    >
+										<suggestionColumns>
+											<Column>
+												<Label text="Name" />
+											</Column>
+											<Column>
+												<Label text="Id" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{UserName}" />
+												<Label text="{UserCode}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</Input>
+									<Select id="Role" 
+									    editable="true"
+									    forceSelection="false"
+									    selectedKey="{path: 'approverList>U_Role',targetType: 'any'}"
+                                        items="{path: '/UDO_K2P_APRV_ROLES', templateShareable: false}"
+	                                       >
+										<core:Item key="{Code}" text="{Code}" />
+									</Select>
+									<Select id="Enabled" selectedKey="{path: 'approverList>U_Enabled', targetType: 'any'}" editable="true">
+										<items>
+											<core:Item text="Yes" key="Y"/>
+											<core:Item text="No" key="N"/>
+										</items>
+									</Select>
+									<DatePicker value="{path: 'approverList>U_Expires',targetType: 'any'}" editable="true" />
+									<Input value="{path: 'approverList>U_Ladder',targetType: 'any'}" editable="false"  visible="true"/>
+									<Input value="{path: 'approverList>U_Property',targetType: 'any'}" editable="false"  visible="true"/>
+									<Input value="{path: 'approverList>U_Project',targetType: 'any'}" editable="false" visible="true" />
+									<Button id="btnDeleteLine" icon="sap-icon://delete" press="onDeleteLine" visible="true"/>
+									<Input id="UserCode" value="{path: 'approverList>U_UserCode',targetType: 'any'}" editable="false" visible="false"/>
+									<Input id="DocEntry" value="{path: 'approverList>DocEntry',targetType: 'any'}" editable="false" visible="false"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+				<Panel id="pnlLadderLines">
+					<Table id="ladderLines" inset="false" mode="SingleSelectMaster" includeItemInSelection="false" selectionChange="onSelectionChangeLines"
+				   	items="{path: '/UDO_K2P_APRV_LINES', parameters: {$filter : 'U_Ladder eq \'Xyz$\'', $orderby : 'U_Amt'}}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+								    <Title text="{i18n>ladder}" level="H2"/>
+									<ToolbarSpacer/>
+									<Button text="Populate"  id="btnPopulate" icon="sap-icon://collapse-group" press="onPopulate" visible="true" class="sapUiResponsiveMargin"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Desktop">
+								<Text text="Ladder"/>
+							</Column>
+							<Column >
+								<Text text="Role" />
+							</Column>
+							<Column >
+								<Text text="Amount" />
+							</Column>
+							<Column width="100px"></Column>
+						</columns>
+						<items>
+							<ColumnListItem id = "ladderLinesItems">
+								<cells>
+									<Input id="Target2" value="{path: 'U_Ladder',targetType: 'any'}" editable="false"/>
+									<Input id="Role2" value="{path: 'U_Role',targetType: 'any'}" editable="false"/>
+									<Input id="Amt2" value="{path: 'U_Amt', targetType: 'any'}"  editable="false"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

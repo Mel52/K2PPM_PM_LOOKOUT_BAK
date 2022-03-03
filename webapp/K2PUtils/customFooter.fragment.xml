@@ -1,0 +1,8 @@
+<Toolbar class="k2PFooter"
+	xmlns="sap.m">
+	<Button press="onNavLogout" text="Logout"/>
+	<ToolbarSpacer/>
+	<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+	<ToolbarSpacer/>
+
+</Toolbar>

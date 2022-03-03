@@ -1,0 +1,424 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "K2PPM_PM",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"ach": "CA-UI5-FST",
+
+		"dataSources": {
+
+			"serviceLayer": {
+				"uri": "https://lookoutportal.vision33cloud.com/xsengine/K2PPM_PM/xsjs/K2POdata.xsjs/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			},
+			"semanticLayer": {
+				"uri": "https://lookoutportal.vision33cloud.com/xsengine/K2PPM_PM/xsjs/K2POdata.xsjs/sml.svc/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			}
+
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "K2PPM_PM.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"dependencies": {
+			"minUI5Version": "1.50",
+			"libs": {
+				"sap.fiori": {
+					"minVersion": ""
+				},
+				"sap.m": {},
+				"sap.ui.comp": {
+					"minVersion": ""
+				},
+				"sap.ui.core": {}
+			}
+		},
+		"handleValidation": true,
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "K2PPM_PM.i18n.i18n",
+					"synchronizationMode": "None"
+				}
+			},
+			"serviceLayerAuto": {
+				"dataSource": "serviceLayer",
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$auto",
+					"operationMode": "Server",
+					"autoExpandSelect": false
+				}
+			},
+			"": {
+				"dataSource": "serviceLayer",
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"operationMode": "Server",
+					"autoExpandSelect": false,
+					"groupProperties": {
+						"UpdateGroup1": {
+							"submit": "Auto"
+						},
+						"UpdateGroup2": {
+							"submit": "Auto"
+						},
+						"UpdateGroup3": {
+							"submit": "Direct"
+						},
+						"CreatePO": {
+							"submit": "API"
+						},
+						"approverList": {
+							"submit": "Auto"
+						},
+						"ladderList": {
+							"submit": "API"
+						},
+						"vendorList": {
+							"submit": "API"
+						}
+					}
+				},
+				"updateGroupId": "UpdateGroup1"
+			},
+			"serviceLayerBatch": {
+				"dataSource": "serviceLayer",
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$auto",
+					"operationMode": "Server",
+					"autoExpandSelect": false,
+					"earlyRequests": true,
+					"groupProperties": {
+						"UpdateBatchGroup1": {
+							"submit": "API"
+						}
+					}
+				}
+			},
+			"serviceLayerBP": {
+				"dataSource": "serviceLayer",
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"preload": false,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$auto",
+					"operationMode": "Server",
+					"autoExpandSelect": false,
+					"earlyRequests": true,
+					"groupProperties": {
+						"bpList": {
+							"submit": "API"
+						}
+					}
+				}
+			},
+			"semanticLayer": {
+				"dataSource": "semanticLayer",
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					 "groupProperties": {
+						"UpdateBatchGroupSemantic": {
+							"submit": "API"
+						}
+					}
+				}
+			}
+
+		},
+
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "K2PPM_PM.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
+			},
+			"routes": [{
+					"pattern": "",
+					"name": "login",
+					"target": "login"
+			}, {
+					"pattern": "home",
+					"name": "home",
+					"target": "home"
+			}, {
+					"pattern": "balances",
+					"name": "balances",
+					"target": "balances"
+			}, {
+					"pattern": "statement",
+					"name": "statement",
+					"target": "statement"
+			}, {
+					"pattern": "property",
+					"name": "property",
+					"target": "property"
+			}, {
+					"pattern": "rentroll",
+					"name": "rentroll",
+					"target": "rentroll"
+			}, {
+					"pattern": "rentroll2",
+					"name": "rentroll2",
+					"target": "rentroll2"
+			}, {
+					"pattern": "rentlist",
+					"name": "rentlist",
+					"target": "rentlist"
+			}, {
+					"pattern": "accountDetails",
+					"name": "accountDetails",
+					"target": "accountDetails"
+			}, {
+					"pattern": "workOrder",
+					"name": "workOrder",
+					"target": "workOrder"
+			}, {
+					"pattern": "workOrderList",
+					"name": "workOrderList",
+					"target": "workOrderList"
+			}, {
+					"pattern": "approvalList",
+					"name": "approvalList",
+					"target": "approvalList"
+		    }, {
+					"pattern": "requestList",
+					"name": "requestList",
+					"target": "requestList"
+			}, {
+					"pattern": "purchaseOrderList",
+					"name": "purchaseOrderList",
+					"target": "purchaseOrderList"
+			}, {
+					"pattern": "inventoryList",
+					"name": "inventoryList",
+					"target": "inventoryList"
+			}, {
+					"pattern": "chargetypes",
+					"name": "chargetypes",
+					"target": "chargetypes"
+			}
+			, {
+					"pattern": "purchaseOrder",
+					"name": "purchaseOrder",
+					"target": "purchaseOrder"
+			}, {
+					"pattern": "tasks",
+					"name": "tasks",
+					"target": "tasks"
+			}, {
+					"pattern": "roles",
+					"name": "roles",
+					"target": "roles"
+			}, {
+					"pattern": "ladders",
+					"name": "ladders",
+					"target": "ladders"
+			}, {
+					"pattern": "ladder",
+					"name": "ladder",
+					"target": "ladder"
+			}, {
+					"pattern": "ladderLines",
+					"name": "ladderLines",
+					"target": "ladderLines"
+			}, {
+					"pattern": "approvers",
+					"name": "approvers",
+					"target": "approvers"
+			}, {
+					"pattern": "customerDetails",
+					"name": "customerDetails",
+					"target": "customerDetails"
+			}
+			
+			
+
+			],
+			"targets": {
+				"login": {
+					"viewId": "login",
+					"viewName": "Login",
+					"viewLevel": 1
+				},
+				"home": {
+					"viewId": "home",
+					"viewName": "Home",
+					"viewLevel": 1
+				},
+				"notFound": {
+					"viewId": "notFound",
+					"viewName": "NotFound",
+					"transition": "show"
+				},
+				"statement": {
+					"viewId": "statement",
+					"viewName": "Statement",
+					"viewLevel": 3
+				},
+				"property": {
+					"viewId": "property",
+					"viewName": "Property",
+					"viewLevel": 2
+				},
+				"rentroll": {
+					"viewId": "rentroll",
+					"viewName": "RentRoll",
+					"viewLevel": 2
+				},
+				"rentroll2": {
+					"viewId": "rentroll2",
+					"viewName": "RentRoll2",
+					"viewLevel": 2
+				},
+				"rentlist": {
+					"viewId": "rentlist",
+					"viewName": "RentList",
+					"viewLevel": 2
+				},
+				"balances": {
+					"viewId": "balances",
+					"viewName": "Balances",
+					"viewLevel": 2
+				},
+				"accountDetails": {
+					"viewId": "accountDetails",
+					"viewName": "AccountDetails",
+					"viewLevel": 2
+				},
+				"workOrder": {
+					"viewId": "workOrder",
+					"viewName": "WorkOrder",
+					"viewLevel": 3
+				},
+				"workOrderList": {
+					"viewId": "workOrderList",
+					"viewName": "WorkOrderList",
+					"viewLevel": 2
+				},
+				"approvalList": {
+					"viewId": "approvalList",
+					"viewName": "ApprovalList",
+					"viewLevel": 2
+				},
+				"requestList": {
+					"viewId": "requestList",
+					"viewName": "RequestList",
+					"viewLevel": 4
+				},
+				"purchaseOrderList": {
+					"viewId": "purchaseOrderList",
+					"viewName": "PurchaseOrderList",
+					"viewLevel": 4
+				},
+				"inventoryList": {
+					"viewId": "inventoryList",
+					"viewName": "InventoryList",
+					"viewLevel": 4
+				},
+				"chargetypes": {
+					"viewId": "chargetypes",
+					"viewName": "ChargeTypes",
+					"viewLevel": 2
+				},
+				"purchaseOrder": {
+					"viewId": "purchaseOrder",
+					"viewName": "PurchaseOrder",
+					"viewLevel": 3
+				},
+				"tasks": {
+					"viewId": "tasks",
+					"viewName": "Tasks",
+					"viewLevel": 2
+				},
+				"roles": {
+					"viewId": "roleList",
+					"viewName": "RoleList",
+					"viewLevel": 2
+				},
+				"ladders": {
+				    "viewId": "ladderList",
+					"viewName": "LadderList",
+					"viewLevel": 2
+				},
+				"ladder": {
+				    "viewId": "ladder",
+					"viewName": "Ladder",
+					"viewLevel": 2
+				},
+				"ladderLines": {
+				    "viewId": "ladderLines",
+					"viewName": "LadderLines",
+					"viewLevel": 3
+				},
+				"approvers": {
+				    "viewId": "approverList",
+					"viewName": "ApproverList",
+					"viewLevel": 2
+				},
+				"customerDetails": {
+				    "viewId": "customerDetails",
+					"viewName": "CustomerDetails",
+					"viewLevel": 2
+				}
+				
+				
+				
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "./K2PUtils/style.css"
+			}]
+		}
+	}
+}

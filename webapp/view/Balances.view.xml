@@ -1,0 +1,53 @@
+<mvc:View controllerName="K2PPM_PM.controller.Balances" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="BalancesPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<Panel id="pnlBalances" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>balances}">
+				<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange"
+					items="{ path: '/value' }">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="{i18n>items}" level="H2"/>
+							<ToolbarSpacer/>
+							<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column minScreenWidth="Desktop" width="12em">
+							<Text text="Customer"/>
+						</Column>
+						<Column width="12em">
+							<Text text="Name"/>
+						</Column>
+						<Column width="12em">
+							<Text text="Balance"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{CardCode}"/>
+								<Text text="{CardName}"/>
+								<Text text="{CurrentAccountBalance}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+
+				
+			</Panel>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

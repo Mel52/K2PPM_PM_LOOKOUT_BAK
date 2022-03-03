@@ -1,0 +1,122 @@
+<mvc:View controllerName="K2PPM_PM.controller.Home"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page class="sapUiResponsiveContentPadding k2pPage" id="thisPage">
+		<customHeader id="thisHeader">
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<Panel class="sapUiResponsiveMargin k2pPanel" width="auto" visible="false" id="pnlCustomer" headerText="{i18n>properties}">
+				<!--headerText="{i18n>properties}" -->
+				<Image src="./images/Key2Small2.JPG" height="30px" id="image022" tooltip="icon"/>
+				<GenericTile id="_tileCustomer" header="{i18n>customerDetails}" press="onNavToCustomerDetails" class="k2pTile sapUiTinyMargin" visible="true">
+					<TileContent>
+						<ImageContent src="sap-icon://customer-view"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tile4" header="{i18n>property}" press="onNavToProperty" class="k2pTile sapUiTinyMargin" visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://addresses"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tile3" header="{i18n>rentRoll}" press="onNavToRentRoll" class="k2pTile sapUiTinyMargin"  visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://collections-insight"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tile0" header="{i18n>balances}" press="onNavToBalances" class="k2pTile sapUiTinyMargin" visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://monitor-payments"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tile5" header="Properties" press="onNavToRentRoll2" class="k2pTile sapUiTinyMargin" visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://addresses"/>
+					</TileContent>
+				</GenericTile>
+			</Panel>
+			<Panel class="sapUiResponsiveMargin k2pPanel" width="auto" visible="true" id="pnlTiles4" headerText="{i18n>purchaseOrder}">
+				<GenericTile id="_tileApprovals" header="Approval Requests" press="onNavToApprovalList" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://approvals"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tilePOList" header="Purchase Orders" press="onNavToPurchaseOrderList" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://sales-document"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tilePO" header="New Purchase Order Request" press="onNavToPurchaseOrder" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://sales-document"/>
+					</TileContent>
+				</GenericTile>
+			</Panel>
+			<Panel class="sapUiResponsiveMargin k2pPanel" width="auto" visible="true" id="pnlTiles2" headerText="{i18n>workOrder}">
+				<GenericTile id="_tileWOList" header="{i18n>workOrders}" press="onNavToworkOrderList" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://wrench"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tileWO" header="{i18n>newWorkOrder}" press="onNavToworkOrder" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://wrench"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tileTasks" header="Tasks" press="onNavToTasks" class="k2pTile sapUiTinyMargin" visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://workflow-tasks"/>
+					</TileContent>
+				</GenericTile>
+			</Panel>
+			<Panel class="sapUiResponsiveMargin k2pPanel" width="auto" visible="false" id="pnlApprovalAdmin" headerText="{i18n>approvalAdmin}">
+				<GenericTile id="_tileAdmin" header="{i18n>administration}" press="onNavToAdmin" class="k2pTile sapUiTinyMargin" visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://settings"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tileChargeTypes" header="{i18n>chargeTypes}" press="onNavToChargeTypes" class="k2pTile sapUiTinyMargin" visible="false">
+					<TileContent>
+						<ImageContent src="sap-icon://settings"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tileRoles" header="{i18n>roles}" press="onNavToRoleList" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://role"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tileLadders" header="{i18n>ladders}" press="onNavToLadderList" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://activities"/>
+					</TileContent>
+				</GenericTile>
+				<GenericTile id="_tileApprovers" header="{i18n>approvers}" press="onNavToApproverList" class="k2pTile sapUiTinyMargin">
+					<TileContent>
+						<ImageContent src="sap-icon://employee-approvals"/>
+					</TileContent>
+				</GenericTile>
+			</Panel>
+			<!--	<Table id="idUserTable" inset="false" visible="false" mode="SingleSelect" includeItemInSelection="false" selectionChange="onSelectionChange"
+					items="{path: '/Users(1)'
+						}" ><columns><Column minScreenWidth="Desktop"><Text text="UserCode"/></Column></columns><items><ColumnListItem><cells><Input value="{path: 'UserCode',targetType: 'any'}" editable="false" /></cells></ColumnListItem></items></Table><Panel><l:VerticalLayout class="sapUiContentPadding" width="100%"><l:content><FlexBox alignItems="Center"><Image id="image2" src="./images/Buildings.jpg" mode="Background" height="50em" width="50em"/></FlexBox></l:content></l:VerticalLayout></Panel>
+		-->
+			<HBox visible="false">
+				<Button id="btnChangePassword" text="Change Password" width="200px" icon="sap-icon://activate" press="onChangePassword" class="sapUiResponsiveMargin k2pTile"/>
+			</HBox>
+		</content>
+		<footer>
+			<!--<customFooter><core:Fragment id="footerFrag" fragmentName="K2PPM_PM.K2PUtils.customFooter" type="XML"/></customFooter>-->
+			<Toolbar>
+				<Button press="onNavLogout" text="{i18n>logout}"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

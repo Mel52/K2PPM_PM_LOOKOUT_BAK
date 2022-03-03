@@ -1,0 +1,87 @@
+LOOKOUT SOCIETY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Manifest.json
+
+	"serviceLayer": {
+				"uri": "https://lookoutportal.vision33cloud.com/xsengine/K2PPM_PM/xsjs/K2POdata.xsjs/",
+				
+				"uri": "https://lookoutportal.vision33cloud.com/xsengine/K2PPM_PM/xsjs/K2POdata.xsjs/sml.svc/"
+
+models
+	},
+		createQueryParameters: function() {
+			var data = {
+				//url: "/destinations/key2p",
+				url: "https://lookoutportal.vision33cloud.com/xsengine",
+				sl: "/K2PPM_PM/xsjs/K2POdata.xsjs/",
+	
+		createLocalModel: function() {
+
+			var data = {
+			..............
+
+				B1UserName: "manager",
+				B1Password: "Vision33$", 
+				B1CompanyDB: "SAP_LOOKOUT_TEST",
+
+
+xsjs
+
+K2PB1
+function parseB1RequestInfo() {
+
+	$.trace.error("Start of parse");
+	var requestInfo = {};
+	requestInfo.destinationPath = "K2PPM_PM.xsjs";
+	requestInfo.destination = "hanab1";
+
+   //CORRECT THE METADATA LINKS
+	$.trace.error(newBody);
+
+	var findContext = "hanab1:50000/b1s/v2";
+
+KEY2PRECISION  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+manifest.json
+
+			"serviceLayer": {
+				"uri": "https://portal.key2precision.com:4300/K2PPM_PM/xsjs/K2POdata.xsjs/",
+
+	},
+			"semanticLayer": {
+				"uri": "https://portal.key2precision.com:4300/K2PPM_PM/xsjs/K2POdata.xsjs/sml.svc/",
+
+
+models
+
+		createQueryParameters: function() {
+			var data = {
+				//url: "/destinations/key2p",
+				url: "https://portal.key2precision.com:4300",
+				sl: "/K2PPM_PM/xsjs/K2POdata.xsjs/",
+
+		createLocalModel: function() {
+
+			var data = {
+			..............
+
+				B1UserName: "manager",
+				B1Password: "Duffy01!", //Duffy01!
+				B1CompanyDB: "DMJPROP",
+
+xsjs
+
+K2PB1
+
+function parseB1RequestInfo() {
+
+	$.trace.error("Start of parse");
+	var requestInfo = {};
+	requestInfo.destinationPath = "K2PPM_PM.xsjs";
+	requestInfo.destination = "hanab1";
+
+	//CORRECT THE METADATA LINKS
+	$.trace.error(newBody);
+
+	var findContext = "hanab1vm2:50000/b1s/v2";

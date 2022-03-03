@@ -1,0 +1,32 @@
+<mvc:View
+    controllerName="K2PPM_PM.controller.AccountDetails"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	busyIndicatorDelay="0"
+	>
+	<Page id="statementPage" title="{i18n>Statement}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<Panel id="pnlTenant" class="sapUiResponsiveMargin" width="auto" visible="true">
+				<l:HorizontalLayout id="__layout3">
+					<l:VerticalLayout width="40%" id="__layout1">
+						<Text
+							xmlns="sap.m" text="Tenant:" class="sapUiSmallMargin"/>
+							<Input id="Tenant" class="sapUiSmallMarginBegin sapUiSmallMarginBottom" value="{bp>/value/0/CardName}" width="200px"/>
+							<!--<Text text="{bp>/value/0/Address}" id="__text15"  width="70px" class="sapUiResponsiveMargin"/> -->
+							<!--<Input id="Tenant" class="sapUiSmallMarginBegin sapUiSmallMarginBottom" value="TEST"/>	-->
+						</l:VerticalLayout>
+						<l:VerticalLayout width="10%" id="__layout4"></l:VerticalLayout>
+						<l:VerticalLayout width="50%" id="__layout2">
+							<Text text="Address:" class="sapUiSmallMargin"/>
+							<Text id="Address" class="sapUiSmallMarginBegin sapUiSmallMarginBottom" text="{bp>/value/0/Address}\n{bp>/value/0/Block}\n{bp>/value/0/City}, {bp>/value/0/BillToState} {bp&gt;/value/0/ZipCode}\n{bp>/value/0/Country}" width="200px"/>
+						</l:VerticalLayout>
+					</l:HorizontalLayout>
+				</Panel>
+			</content>
+		</Page>
+	</mvc:View>

@@ -1,0 +1,120 @@
+									<!--,sorter: [{path: 'CardCode', descending: false}]
+									filters: [{path: 'Code', operator: 'EQ', value1: 'XYZ'}],
+									-->
+
+				<Table id="DocumentLines" inset="false" visible="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChangeLines"
+				items="{path: 'purchaseOrder>/DocumentLines'}"
+				   	>
+					<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<Button text="{i18n>AddItemButtonText}"  id="btnAddItem" icon="sap-icon://add" press="onAddItem" visible="true" class="sapUiResponsiveMargin"/>
+								<Button text="{i18n>deleteButtonText}"  id="btnDeleteItem" icon="sap-icon://delete" press="onDeleteItem" visible="true" class="sapUiResponsiveMargin"/>
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column minScreenWidth="Desktop">
+							<Text text="Account"/>
+						</Column>
+						<Column minScreenWidth="Desktop">
+							<Text text="Description"/>
+						</Column>
+						<Column >
+							<Text text="Quantity" />
+						</Column>
+						<Column >
+							<Text text="Total" />
+						</Column>
+						<Column >
+							<Text text="Tenant"/>
+						</Column>
+						<Column ><Text text="Account"  visible="true"/></Column>
+						<Column >
+							<Text text="Program"/>
+						</Column>
+						<Column >
+							<Text text="Property"/>
+						</Column>
+
+						<Column >
+							<Text text="Lease"/>
+						</Column>
+						<Column >
+							<Text text="Unit"/>
+						</Column>
+						<Column >
+							<Text text="Charge To"/>
+						</Column>
+						<Column >
+							<Text text="Charge Amt"/>
+						</Column>
+						<Column >
+							<Text text="Tax Code"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Input id="K2P_Account" 
+								    value="{purchaseOrder>U_K2P_Account}"  
+								    placeholder="Enter Account"
+								    enabled="true"  
+									width="800px"
+									showSuggestion="true"
+                                    suggestionRows="{path: '/ChartOfAccounts', parameters: {$filter : 'ActiveAccount eq  \'Y\''}, templateShareable:false}"
+                                    >
+										<suggestionColumns>
+											<Column>
+												<Label text="Account" />
+											</Column>
+											<Column	hAlign="Center">
+												<Label text="Number" />
+											</Column>
+											<Column hAlign="End">
+												<Label text="Sys Code" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{Name}" />
+												<Label text="{FormatCode}" />
+												<Label text="{Code}" />
+											</ColumnListItem>
+										</suggestionRows>
+								</Input>
+								<Input value="{purchaseOrder>ItemDescription}"  editable="true"/>
+								<Input value="{purchaseOrder>U_K2P_QtyService}"  editable="true"/>
+								<Input value="{purchaseOrder>LineTotal}"  editable="true"/>
+								<Input value="{purchaseOrder>U_K2P_Tenant}"  editable="true"/>
+								<Input value="{purchaseOrder>AccountCode}"  editable="false"  visible="true"/>
+								<Input value="{purchaseOrder>U_K2P_Property}"  editable="true"/>
+								<Input value="{purchaseOrder>U_K2P_ProjCode}"  editable="true"/>
+								<Input value="{purchaseOrder>U_K2P_DocNum}"  editable="true"/>
+								<Input value="{purchaseOrder>U_K2P_UnitID}"  editable="true"/>
+								<Select id="K2P_ChrgTo" selectedKey="{purchaseOrder>U_K2P_ChrgTo}"  editable="true" forceSelection="true">
+									<items>
+										<core:Item text="None" key="N"/>
+										<core:Item text="Tenant" key="T"/>
+										<core:Item text="Owner" key="O"/>
+									</items>
+									<core:Item key="{U_K2P_ChrgTo}" text="{U_K2P_ChrgTo}" />
+								</Select>
+								<!--<Input value="{purchaseOrder>U_K2P_ChrgTo}"  editable="true"/>-->
+								<Input value="{purchaseOrder>K2P_ChrgAmt}"  editable="true"/>
+								<Input value="{purchaseOrder>TaxCode}"  editable="false"/>
+								<!-- <Input value="{path: 'LineNum',targetType: 'any'}" editable="false"/><Input value="{path: 'ItemDescription', targetType: 'any'}"  editable="true"/><Input value="{path: 'LineTotal', targetType: 'any'}"  editable="false"/><Input value="{path: 'AccountCode', targetType: 'any'}"  editable="false"/><Input value="{path: 'TaxCode', targetType: 'any'}"  editable="false"/>-->
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				
+				
+						<!--
+		<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange" 
+					items="{path: '/PurchaseOrders',
+					parameters: {$$updateGroupId : 'UpdateBatchGroup1'}, 
+					filters: [{path: 'DocNum', operator: 'EQ', value1: '-1'}]},
+					events: {dataReceived : '.onDataReceived'}}"
+				    visible="true"	><columns><Column minScreenWidth="Desktop"><Text text="PO #"/></Column></columns><items><ColumnListItem><cells></cells></ColumnListItem></items></Table>
+		-->

@@ -1,0 +1,293 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.CustomerDetail"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.model.type"
+	busyIndicatorDelay="0"
+	>
+	<Page id="customerDetail" title="{i18n>customerDetails}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding k2pPage" >
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<Panel>
+				<VBox id="VBox1" class="sapUiSmallMargin">
+					<f:Form id="mainForm" editable="true" visible="true">
+						<f:title>
+							<core:Title text="{i18n>customerDetails}" />
+						</f:title>
+						<f:layout>
+							<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="CardName" id="CardName">
+										<f:fields>
+											<Input id="Customer"
+									editable="true"
+									value="{viewModel>/CardName}" 
+									placeholder="Enter Customer"
+									showSuggestion="false"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".onValueHelpRequestCustomer"
+                                    >
+												<suggestionColumns>
+													<Column>
+														<Label text="Name" />
+													</Column>
+													<Column>
+														<Label text="Customer ID" />
+													</Column>
+												</suggestionColumns>
+												<suggestionRows>
+													<ColumnListItem>
+														<Label text="{CardName}" />
+														<Label text="{CardCode}" />
+													</ColumnListItem>
+												</suggestionRows>
+											</Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Code" id="CardCode">
+										<f:fields>
+											<Input id="CardCode1"									
+									editable="false"
+									value="{viewModel>/CardCode}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Current Balance">
+										<f:fields>
+											<Input  id="Balance"									
+									editable="false"
+									value="{path: 'viewModel>/Balance'}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Lease" id="Lease">
+										<f:fields>
+											<Input id="Lease1"									
+									editable="false"
+									value="{leaseModel>/value/0/DocNum}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Property" id="Property">
+										<f:fields>
+											<Input id="Property1"									
+									editable="false"
+									value="{leaseModel>/value/0/U_Property}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Property Name">
+										<f:fields>
+											<Input id="PropertyName"									
+									editable="false"
+									value="{viewModel>/PropertyName}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Unit" id="UnitID">
+										<f:fields>
+											<Input id="UnitID1"									
+									editable="false"
+									value="{leaseModel>/value/0/U_UnitID}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Status" id="Status">
+										<f:fields>
+											<Select id="Status1" selectedKey="{leaseModel>/value/0/U_Status}" editable="false">
+												<items>
+													<core:Item text="Active" key="A"/>
+													<core:Item text="Closed" key="C"/>
+													<core:Item text="Pending" key="P"/>
+													<core:Item text="Teminated" key="T"/>
+												</items>
+											</Select>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="From" id="From">
+										<f:fields>
+											<Input id="From1"									
+									editable="false"
+									value="{leaseModel>/value/0/U_FromDt}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="To" id="EndDt">
+										<f:fields>
+											<Input id="EndDt1"									
+									editable="false"
+									value="{leaseModel>/value/0/U_EndDt}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Move In" id="PossesDt">
+										<f:fields>
+											<Input id="PossesDt1"									
+									editable="false"
+									value="{leaseModel>/value/0/U_PossesDt}"></Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Move Out" id="MvOutDt">
+										<f:fields>
+											<Input id="MvOutDt1"									
+									editable="false"
+									value="{leaseModel>/value/0/U_MvOutDt}"></Input>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</VBox>
+				<VBox id="VBox2" class="sapUiSmallMargin"></VBox>
+			</Panel>
+			<Panel id="pnlDetails" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>transactions}"  expandable="false" expanded="true">
+				<HBox>
+					<Text text="Beginning Balance" class="sapUiSmallMargin"/>
+					<Input value="{path: 'viewModel>/BegBal',targetType: 'any'}" editable="false" class="sapUiSmallMargin">
+						<layoutData>
+							<ToolbarLayoutData shrinkable="false" />
+						</layoutData>
+					</Input>
+				</HBox>
+				<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+					<Table id="idMainTable" inset="false" mode="None" includeItemInSelection="false" selectionChange="onSelectionChange"
+					items="{path: 'semanticLayer>/K2P_CUSTOMER_DETAILS_QUERY', parameters: {$filter : 'CardType eq \'C\' and CardCode ne \'xxxpuiy\'', $orderby : 'Number'}}" width="100%">
+						<headerToolbar >
+							<Toolbar>
+								<content>
+									<Text text="Open" class="sapUiSmallMargin">
+										<layoutData>
+											<ToolbarLayoutData shrinkable="false" />
+										</layoutData>
+									</Text>
+									<Button
+											id="refreshButton"
+											visible="true"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											class="sapUiSmallMargin"
+											press=".onOpen"/>
+									<Text text="All" class="sapUiSmallMargin">
+										<layoutData>
+											<ToolbarLayoutData shrinkable="false" />
+										</layoutData>
+									</Text>
+									<Button
+											id="allButton"
+											visible="true"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											class="sapUiSmallMargin"
+											press=".onAll"/>
+									<ToolbarSpacer/>
+									<Text text="Date Range" class="sapUiSmallMargin"/>
+									<DateRangeSelection
+			                            id="dateRange1"
+			                            width="16em"
+			                            valueFormat="yyyy-MM-dd"
+			                            displayFormat="yyyy-MM-dd"  
+			                            change="dateRangeChange"/>
+									<ToolbarSpacer/>
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Desktop">
+								<Text text="Journal"/>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Posting Date" width="auto" minWidth="10em"/>
+								<layoutData>
+									<ToolbarLayoutData shrinkable="false" />
+								</layoutData>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Property"/>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Description"/>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Type"/>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Origin"/>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Amount"/>
+							</Column>
+							<Column  minScreenWidth="Desktop">
+								<Text text="Open"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Input id="TransId" value="{path: 'semanticLayer>Number',targetType: 'any'}" editable="false" />
+									<Input id="TaxDate" value="{path: 'semanticLayer>TaxDate',targetType: 'any'}" editable="false">
+										<layoutData>
+											<ToolbarLayoutData shrinkable="false" />
+										</layoutData>
+									</Input>
+									<Input id="Property2" value="{path: 'semanticLayer>OcrCode3',targetType: 'any'}" editable="false"/>
+									<Input id="Ref2" value="{path: 'semanticLayer>Ref2',targetType: 'any'}" editable="false"/>
+									<Select id="TransType" selectedKey="{semanticLayer>TransType}" editable="false">
+										<items>
+											<core:Item text="-3" key="-3"/>
+											<core:Item text="-2" key="-2"/>
+											<core:Item text="IN" key="13"/>
+											<core:Item text="CM" key="14"/>
+											<core:Item text="DN" key="15"/>
+											<core:Item text="16" key="16"/>
+											<core:Item text="18" key="18"/>
+											<core:Item text="19" key="19"/>
+											<core:Item text="20" key="20"/>
+											<core:Item text="21" key="21"/>
+											<core:Item text="RC" key="24"/>
+											<core:Item text="25" key="25"/>
+											<core:Item text="JE" key="30"/>
+											<core:Item text="46" key="46"/>
+											<core:Item text="58" key="58"/>
+											<core:Item text="59" key="59"/>
+											<core:Item text="67" key="67"/>
+											<core:Item text="202" key="202"/>
+										</items>
+									</Select>
+									<Input id="Ref1" value="{path: 'semanticLayer>Ref1',targetType: 'any'}" editable="false"/>
+									<Input id="Net" value="{path: 'semanticLayer>Net',targetType: 'any'}" editable="false"/>
+									<Input id="NetOpen" value="{path: 'semanticLayer>NetOpen',targetType: 'any'}" editable="false"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</ScrollContainer>
+				<HBox>
+					<Text text="Ending Balance" class="sapUiSmallMargin"/>
+					<Input value="{path: 'viewModel>/EndBal',targetType: 'any'}" editable="false" class="sapUiSmallMargin">
+						<layoutData>
+							<ToolbarLayoutData shrinkable="false" />
+						</layoutData>
+					</Input>
+				</HBox>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

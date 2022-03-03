@@ -1,0 +1,90 @@
+ body{
+      background-color:#D3D3D3;
+      /*background-image:url(K2PUtils/images/bgImage.jpg) ; */    
+      background-size: cover;
+     font-family: Verdana, serif;
+       }
+  h1, h2, h3, h4, h5, h6 {
+  color: #009900;
+  font-family: Georgia, sans-serif;
+}
+p {
+  font-size: small;
+  color: #333333
+}
+
+.myBackgroundStyle{
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  background-image: url('./webapp/images/DCBuildings.jpg');
+}
+
+
+/*Colors*/
+.k2pgreenboldtext{
+  font-size: small;
+  color: green;
+  font-weight: bold;
+}
+.k2pGray {background-color:gray;color:black;padding: 4px}
+.k2plgBack{background-color: #e6e6e6;}
+.k2PLightGray {background-color:#D3D3D3}
+.k2pWhite{background-color:#FFFAF0}
+.k2pLightBlue{background-color:#ceebfd}
+.k2pLightOrange{background-color:#ffc266}
+.k2pLightBlueGray{background-color:#e6eeff}
+.k2pMediumBlue{background-color:#189ab4}
+
+/*KT Colors*/
+.kTred{background-color:#E84929}
+.KTgoldyellow {background-color:#FCBF32}
+.KTlightwarmblue {background-color:#2F9AEC}
+.KTwarmblue {background-color:#16ABEB}
+.KTdarkwarmblue {background-color:#0D80D8}
+.KTlogogray {background-color:#79807E}
+.KTlightgrayblue {background-color:#AAC1DB}
+.KTdarkgrayblue {background-color:#406084}
+.KTmedgrayblue {background-color:#6D98C9}
+
+
+
+/*K2p Controls #1B2A4B*/
+.k2pPage{
+    background-color:#AAC1DB;
+    }
+.k2pHeader{
+	background-color:#D9DCCC;
+}
+.k2pPanel{
+    background-color:#6D98C9;
+    color:white;
+    border: 1px solid #666;
+}
+.k2pTile{
+    color:black;padding: 4px;
+    border: 1px solid #666;
+    background-color:#D9DCCC;
+}
+.k2pTileLightBlue{
+    background-color:#D3D3D3;
+    color:black;padding: 4px;
+    border: 1px solid #666;
+}
+.k2pTileOrange{
+    background-color:#F5B324;
+    color:black;padding: 4px;
+    border: 1px solid #666;
+}
+.k2pTileGray{
+    background-color:#D3D3D3;
+    color:black;padding: 4px;
+    border: 1px solid #666;
+}
+
+.container {
+  width: 95%;
+  margin: auto;
+  background: blue;
+  color: white;
+}

@@ -1,0 +1,175 @@
+<mvc:View controllerName="K2PPM_PM.controller.ApprovalList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="RequestListPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<!--{path: '/Drafts', parameters: {$filter: 'DocObjectCode eq \'oPurchaseOrders\' and DocumentStatus ne \'bost_Close\''}}  
+		{path: '/K2P_APPROVALS_LIST_QUERY'}
+		{ path: '/value', sorter: { path: 'DocNum' } 
+		{path: '/Drafts', parameters: {$orderby: 'DocEntry desc', $filter: 'DocObjectCode eq \'oPurchaseOrders\' and DocumentStatus ne \'bost_Close\''}}
+		-->
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<Panel id="pnlApprovalList" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="Approval Requests"  expandable="true" expanded="true">
+					<Table id="idMainTable" inset="false" mode="None" includeItemInSelection="true" selectionChange="onSelectionChange"
+					items="{ path: '/value'}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Unapproved" level="H2"/>
+									<ToolbarSpacer/>
+									<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="{i18n>property}"
+											search=".onSearch"
+											visible="false"
+											/>
+									<Button
+											id="refreshApprovalsButton"
+											text="My Approvals"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".myApprovals"/>
+									<Button
+											id="refreshAllApprovalsButton"
+											text="All My Approvals"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".allMyApprovals"/>
+									<Button
+											id="refreshRequestsButton"
+											text="My Requests"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".myRequests"/>
+									<Input id="property"
+    								    value="{viewModel>/propertyName}" 
+    								    visible="false"
+									    placeholder="{i18n>property}"
+									    textFormatMode="Value"
+                                        showSuggestion="true"
+                                        showValueHelp="false"
+			                            valueHelpRequest=".onValueHelpRequest"
+                                        width="200px"
+                                        maxSuggestionWidth = "60em"
+                                        suggestionRows="{path: '/UDO_K2P_PROPERTY', parameters: {$select : 'Name,Code,U_ProjCode',$orderby : 'Name'}}"
+                                        suggestionItemSelected=".onSuggestionItemSelectedProperty"
+                                        >
+										<suggestionColumns>
+											<Column>
+												<Label text="Property" />
+											</Column>
+											<Column>
+												<Label text="Code" />
+											</Column>
+											<Column visible="false">
+												<Label text="Project" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{Name}" />
+												<Label text="{Code}" />
+												<Label text="{U_ProjCode}"  visible="false"/>
+											</ColumnListItem>
+										</suggestionRows>
+									</Input>
+									<Button
+											id="sortUsersButton"
+											press=".onSort"
+											tooltip="{i18n>sortButtonText}"
+											visible="false"
+											icon="sap-icon://sort"/>
+									<ToolbarSpacer/>
+									<Button
+											id="addButton"
+											press=".onAdd"
+											tooltip="{i18n>addButtonText}"
+											visible="false"
+											icon="sap-icon://add"/>
+									<ToolbarSpacer/>
+									<ToolbarSpacer/>
+									<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column >
+								<Text text="Edit" />
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="Draft Id"/>
+							</Column>
+							<Column >
+								<Text text="Comment" />
+							</Column>
+							<Column >
+								<Text text="Approval Status" />
+							</Column>
+							<Column >
+								<Text text="Vendor" />
+							</Column>
+							<Column >
+								<Text text="Name"/>
+							</Column>
+							<Column >
+								<Text text="Amount" />
+							</Column>
+							<Column >
+								<Text text="Program"/>
+							</Column>
+							<Column >
+								<Text text="Property Name"/>
+							</Column>
+							<Column >
+								<Text text="Ladder"/>
+							</Column>
+							<Column >
+								<Text text="Creator"/>
+							</Column>
+							<Column >
+								<Text text="Created"/>
+							</Column>
+							<Column >
+								<Text text="Unit"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<Button id="btnLines" icon="sap-icon://detail-view" press="onEditLine" visible="true"/>
+								<cells>
+									<Text id="DocEntry" text="{DocEntry}"/>
+									<Text text="{Comments}"/>
+									<Text text="{U_K2P_APRV_NXT_LVL}"/>
+									<Text text="{CardCode}"/>
+									<Text text="{CardName}"/>
+									<Text text="{DocTotal}"/>
+									<Text text="{U_Project}"/>
+									<Text text="{U_K2P_PropertyName}"/>
+									<Text text="{U_K2P_Ladder}"/>
+									<Text text="{U_K2P_CreateByName}"/>
+									<Text text="{CreateDate}"/>
+									<Text text="{U_K2P_UnitID}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,140 @@
+<mvc:View controllerName="K2PPM_PM.controller.Statement" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" busyIndicatorDelay="0">
+	<Page id="statementPage" title="{i18n>statement}" class="sapUiResponsiveContentPadding k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+			<!--			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="{i18n>backButton}"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>Statement}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Image src="images/KEY.jpg" height="30px" id="image0" tooltip="icon"/>
+				 </Toolbar>-->
+		</customHeader>
+		<content>
+			<Panel id="pnlStatement" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{local>/cardName}">
+				<Table id="idMainTable" inset="false" mode="MultiSelect" selectionChange="onSelectionChange"
+					items="{ path: '/value', sorter: { path: 'DocNum' } }">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="Items" level="H2"/>
+							<ToolbarSpacer/>
+							<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+							<content/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="6em">
+							<Text text="Doc#"/>
+						</Column>
+						<Column minScreenWidth="Desktop" width="8em">
+							<Text text="Description"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Due Date"/>
+						</Column>
+						<Column width="8em">
+							<Text text="Amount Due"/>
+						</Column>
+						<Column minScreenWidth="Desktop" width="8em">
+							<Text text="Amount To Pay"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{DocNum}"/>
+								<Text text="{Comments}"/>
+								<Text text="{DocDueDate}"/>
+								<Text text="{DocTotal}"/>
+								<Input value="{U_JC1_Amount}" change="resetPmtTotal"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Button text="Pay Now" width="200px" id="btnPayNow" icon="sap-icon://activities" visible="false"/>
+			</Panel>
+			<Panel id="pnlPayNow" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>makePayment}">
+				<content>
+					<l:VerticalLayout>
+						<RadioButtonGroup width="100%" columns="4" selectedIndex="-1" id="__group1" select="pmtTypeSelect">
+							<buttons>
+								<RadioButton groupName="__group1" text="{i18n>ach}" id="__button4" selected="true"/>
+								<RadioButton selected="false" groupName="__group1" text="{i18n>CC}" id="__button5"/>
+								<RadioButton selected="false" groupName="__group1" text="{i18n>Check}" id="__button6"/>
+								<RadioButton selected="false" groupName="__group1" text="{i18n>Crypto}" id="__button7" visible="false"/>
+							</buttons>
+						</RadioButtonGroup>
+						<l:HorizontalLayout >
+							<Text xmlns="sap.m" text="{i18n>PmtDate}" class="sapUiSmallMargin" visible="true" width="120px"/>
+							<DatePicker id="DP1" class="sapUiSmallMargin" value="{local>/PmtDate}" width="200px" enabled="true" visible="true" displayFormat="short"
+								valueFormat="yyyy-MM-dd"/>
+						</l:HorizontalLayout>
+						<l:HorizontalLayout >
+							<Text xmlns="sap.m" text="Payment Amt" class="sapUiSmallMargin" visible="true" width="120px" id="lpaymentAmt"/>
+							<Input valueLiveUpdate="true" class="sapUiSmallMargin" width="200px" enabled="true" visible="true" value="{local>/Payment}" editable="false"
+								id="paymentAmt"/>
+						</l:HorizontalLayout>
+						<l:HorizontalLayout >
+							<Text xmlns="sap.m" text="{i18n>CheckNbr}" class="sapUiSmallMargin" visible="false" width="120px" id="lCheckNbr"/>
+							<Input value="{local>/CheckNbr}" valueLiveUpdate="true" width="200px" enabled="true" visible="false" id="CheckNbr"/>
+						</l:HorizontalLayout>
+						<l:HorizontalLayout >
+							<Text xmlns="sap.m" text="Credit Card Nbr" class="sapUiSmallMargin" visible="false" width="120px" id="lCC"/>
+							<Input value="{local>/CreditCard}" valueLiveUpdate="true" width="200px" enabled="true" visible="false" id="CC"/>
+						</l:HorizontalLayout>
+						<l:HorizontalLayout >
+							<Text xmlns="sap.m" text="Expiration Date" class="sapUiSmallMargin" visible="false" width="120px" id="lExpDt"/>
+							<Input valueLiveUpdate="true" width="200px" enabled="true" visible="false" value="{local>/Expiration}" id="ExpDt"/>
+						</l:HorizontalLayout>
+						<l:HorizontalLayout >
+							<Text xmlns="sap.m" text="Security Code" class="sapUiSmallMargin" visible="false" width="120px" id="lSecCode"/>
+							<Input valueLiveUpdate="true" width="200px" enabled="true" visible="false" value="{local>/SecurityCode}" id="SecCode"/>
+						</l:HorizontalLayout>
+						<Button text="Submit " class="sapUiSmallMargin" width="200px" id="btnSubmit" icon="sap-icon://activities" press="onConfirmPayment"
+							visible="true"/>
+						<l:VerticalLayout>
+							<l:HorizontalLayout >
+								<Text xmlns="sap.m" text="Currency" class="sapUiSmallMargin" visible="false" width="120px" id="lcryptoCurrency"/>
+								<ComboBox selectedItem="BTC" id="cmbCrypto" value="{local>/cryptoCode}" class="sapUiSmallMargin" width="auto" visible="false">
+									<items>
+										<core:ListItem text="Bitcoin" key="BTC" id="BTC"/>
+										<core:ListItem text="Monero" key="XMR" id="XMR"/>
+									</items>
+								</ComboBox>
+							</l:HorizontalLayout>
+							<l:HorizontalLayout >
+								<Text xmlns="sap.m" text="Rate" class="sapUiSmallMargin" visible="false" width="120px" id="lcryptoRate"/>
+								<Input valueLiveUpdate="true" width="200px" enabled="false" visible="false" value="{local>/cryptoRate}" editable="false" id="cryptoRate"/>
+							</l:HorizontalLayout>
+							<l:HorizontalLayout >
+								<Text xmlns="sap.m" text="Crypto Amount" class="sapUiSmallMargin" visible="false" width="120px" id="lcryptoAmount"/>
+								<Input valueLiveUpdate="true" width="200px" enabled="false" visible="false" value="{local>/cryptoAmount}" editable="false" id="cryptoAmount"/>
+							</l:HorizontalLayout>
+							<l:HorizontalLayout >
+								<Text xmlns="sap.m" text="Crypto Address" class="sapUiSmallMargin" visible="false" width="120px" id="lcryptoAddress"/>
+								<Input valueLiveUpdate="true" width="800px" enabled="false" visible="false" value="{local>/cryptoAddress}" editable="false"
+									id="cryptoAddress"/>
+							</l:HorizontalLayout>
+							<Button text="Copy Crypto Address " class="sapUiSmallMargin" width="200px" id="btnCopyCrypt" icon="sap-icon://activities" visible="false"/>
+							<l:HorizontalLayout >
+								<FlexBox id="cryptoQR" alignItems="Center" visible="false">
+									<Image src="./images/cryptorequest.png"></Image>
+								</FlexBox>
+							</l:HorizontalLayout>
+						</l:VerticalLayout>
+					</l:VerticalLayout>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

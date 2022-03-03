@@ -1,0 +1,19 @@
+<Dialog class="sapUiResponsiveMargin"
+	xmlns="sap.m" title="Password Change" id="dialogPW">
+	<HBox>
+		<Text text="Old"  class="sapUiSmallMargin" />
+		<Input value="{localModel>/oldPassword}" type="Password" showSuggestion="false" showValueHelp="false" valueLiveUpdate="false"/>
+	</HBox>
+	<HBox>
+		<Text text="New" class="sapUiSmallMargin"/>
+		<Input value="{localModel>/newPassword}"  type="Password" showSuggestion="false" showValueHelp="false" valueLiveUpdate="false"/>
+	</HBox>
+	<HBox>
+		<Text text="Confirm"  class="sapUiSmallMargin"/>
+		<Input value="{localModel>/newPassword2}" type="Password" showSuggestion="false" showValueHelp="false" valueLiveUpdate="false"/>
+	</HBox>
+	<buttons>
+		<Button text="Change Password" press=".onSavePassword" type="Password" />
+		<Button text="Cancel" press=".onCancelPassword"/>
+	</buttons>
+</Dialog>

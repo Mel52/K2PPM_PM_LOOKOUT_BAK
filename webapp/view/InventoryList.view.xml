@@ -1,0 +1,91 @@
+<mvc:View controllerName="K2PPM_PM.controller.InventoryList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="RequestListPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<Panel id="pnlApproved" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="Inventory"  expandable="true" expanded="true">
+					<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange"
+					
+>
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Goods Issue" level="H2"/>
+									<ToolbarSpacer/>
+									<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="{i18n>property}"
+											search=".onSearch"
+											/>
+									<Button
+											id="refreshUsersButton"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".onRefresh"/>
+									<Button
+											id="sortUsersButton"
+											press=".onSort"
+											tooltip="{i18n>sortButtonText}"
+											icon="sap-icon://sort"/>
+									<ToolbarSpacer/>
+									<Button
+											id="addButton"
+											press=".onAdd"
+											tooltip="{i18n>addButtonText}"
+											icon="sap-icon://add"/>
+									<ToolbarSpacer/>
+									<ToolbarSpacer/>
+									<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Desktop">
+								<Text text="Item"/>
+							</Column>
+							<Column >
+								<Text text="Quantity" />
+							</Column>
+							<Column >
+								<Text text="Price" />
+							</Column>
+							<Column >
+								<Text text="Warehouse"/>
+							</Column>
+							<Column >
+								<Text text="Amount" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{DocNum}"/>
+									<Text text="{Comments}"/>
+									<Text text="{CardCode}"/>
+									<Text text="{CardName}"/>
+									<Text text="{DocTotal}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

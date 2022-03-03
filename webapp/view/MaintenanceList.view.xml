@@ -1,0 +1,88 @@
+<mvc:View controllerName="K2PPM_PM.controller.MaintenanceList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="ServiceCallPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<Panel id="pnlWorkOrder" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>workOrders}"  expandable="true" expanded="true">
+					<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange"
+                        items="{path: '/UDO_K2P_WORKORDER', parameters: {$orderby: 'DocNum desc'}, events : {'dataReceived' : '.onDataReceived', dataRequested : '.onDataRequested', 
+				   	    AggregatedDataStateChange : '.onAggregatedDataStateChange', 'change' : '.onChange', 'DataStateChange' : '.onDataStateChange'  } }">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="{i18n>workOrders}" level="H2"/>
+									<ToolbarSpacer/>
+									<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="{i18n>property}"
+											search=".onSearch"></SearchField>
+									<Button
+											id="refreshUsersButton"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".onRefresh"/>
+									<Button
+											id="sortUsersButton"
+											press=".onSort"
+											tooltip="{i18n>sortButtonText}"
+											icon="sap-icon://sort"/>
+									<ToolbarSpacer/>
+									<Button
+											id="addButton"
+											press=".onAdd"
+											tooltip="{i18n>addButtonText}"
+											icon="sap-icon://add"/>
+									<ToolbarSpacer/>
+									<ToolbarSpacer/>
+									<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Desktop">
+								<Text text="Work Order"/>
+							</Column>
+							<Column >
+								<Text text="Subject" />
+							</Column>
+							<Column >
+								<Text text="Tenant" />
+							</Column>
+							<Column >
+								<Text text="Property"/>
+							</Column>
+							<Column >
+								<Text text="Lease" />
+							</Column>
+							<Column >
+								<Text text="User" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{DocNum}"/>
+									<Text text="{U_Descr}"/>
+									<Text text="{U_CardCode}"/>
+									<Text text="{U_Property}"/>
+									<Text text="{U_Lease}"/>
+									<Text text="{U_User}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<!--<Toolbar><Button press="onNavLogout" text="Logout"/><ToolbarSpacer/><Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/><ToolbarSpacer/><Button press="onNavHome" tooltip="{homeButton}" icon="sap-icon://home"/></Toolbar>-->
+		</footer>
+	</Page>
+</mvc:View>

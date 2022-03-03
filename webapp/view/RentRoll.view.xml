@@ -1,0 +1,85 @@
+<mvc:View  xmlns="sap.m" controllerName="K2PPM_PM.controller.RentRoll" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="BalancesPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<Button text="Test Now" width="200px" id="btnTestNow" icon="sap-icon://activities" visible="false" press="onTestNow"/>
+			<Panel id="pnlProperties" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>rentRoll}">
+			    
+			    
+				<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange"
+					items="{ path: '/K2PPM_RENTROLL_QUERY' }">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="{i18n>items}" level="H2"/>
+							<ToolbarSpacer/>
+							<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column minScreenWidth="Desktop">
+							<Text text="Property"/>
+						</Column>
+						
+						<Column >
+							<Text text="Unit" width="10em"/>
+						</Column>
+						<Column >
+							<Text text="Tenant"/>
+						</Column>
+						<Column >
+							<Text text="From"/>
+						</Column>
+						<Column >
+							<Text text="To"/>
+						</Column>
+						<Column >
+							<Text text="Area"/>
+						</Column>
+						<Column >
+							<Text text="Rent"/>
+						</Column>
+						<Column >
+							<Text text="Annual Rent"/>
+						</Column>
+						<Column >
+							<Text text="RentPerArea"/>
+						</Column>
+						<Column >
+							<Text text="Lease"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Code}"/>
+								<Text text="{U_UnitID}"/>
+								<Text text="{TenantVacant}"/>
+								<Text text="{U_FromDt}"/>
+								<Text text="{U_EndDt}"/>
+								<Text text="{U_Area}"/>
+								<Text text="{U_RentPer}"/>
+								<Text text="{AnnualRent}"/>
+								<Text text="{RentPerArea}"/>
+								<Text text="{DocNum}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+
+				
+			</Panel>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

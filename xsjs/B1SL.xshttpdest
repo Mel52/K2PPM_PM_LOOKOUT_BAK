@@ -1,0 +1,11 @@
+description = "B1 SL https connection";
+host = "portal.key2precision.com";
+port = 50000;
+pathPrefix = "";
+proxyType = none;
+proxyHost = "";
+proxyPort = 0;
+authType = none;
+useSSL = true;
+timeout = 0;
+sslHostCheck = true;

@@ -1,0 +1,105 @@
+<mvc:View
+    controllerName="K2PPM_PM.controller.Statement"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	busyIndicatorDelay="0"
+	>
+	<Page id="statementPage" title="{i18n>Statement}"
+		class="sapUiResponsiveContentPadding">
+		<customHeader>
+			<Toolbar>
+			<Button   type="Back" press="onNavBack" />
+			<ToolbarSpacer/>
+			    <Text text="{i18n>Statement}" class="sapUiResponsiveContentPadding "/>
+			    <ToolbarSpacer/>
+			    	<ImageContent src="images/Key2Small2.JPG" id="image1" visible="true"  class="sapUiMediumMarginBegin"/>
+				</Toolbar>
+		</customHeader>
+		<content>
+		<Panel id="pnlStatement" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>OpenItems}">
+
+		
+				<Table id="idStatementTable" inset="false" mode="MultiSelect" selectionChange="onInvoiceSelectionChange" items="{ path: '/value', sorter: { path: 'DocNum' } }">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="Items" level="H2"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="12em">
+							<Text text="Doc#"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Description"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Due Date"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Amount Due"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Amount To Pay"/>
+						</Column>
+					
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{DocNum}"/>
+								<Text text="{Comments}"/>
+								<Text text="{DocDueDate}"/>
+								<Text text="{DocTotal}"/>
+								<Input value="{U_JC1_Amount}" change="resetPmtTotal"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Button text="Pay Now" width="200px" id="btnPayNow" icon="sap-icon://activities" visible="false"/>
+			</Panel>
+		<Panel id="pnlPayNow" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="Payment Information">
+			<content>
+			<l:VerticalLayout>
+				
+			<RadioButtonGroup width="100%" columns="2" selectedIndex="-1" id="__group1" select="pmtTypeSelect">
+			    <buttons>
+			        <RadioButton  groupName="__group1" text="{i18n>ach}" id="__button4"/>
+			        <RadioButton selected="true" groupName="__group1" text="{i18n>CC}" id="__button5"/>
+			    </buttons>
+			</RadioButtonGroup>
+			
+			<l:HorizontalLayout>
+			<Text xmlns="sap.m" text="{i18n>PmtDate}" class="sapUiSmallMargin" visible="true" width="120px"/>
+			<DatePicker id="DP1" value="{local>/PmtDate}" valueLiveUpdate="true" width="200px" enabled="true" visible="true"  
+			    displayFormat="short" valueFormat="yyyy-MM-dd"/>
+			</l:HorizontalLayout>
+			<l:HorizontalLayout>
+			<Text xmlns="sap.m" text="{i18n>CheckNbr}" class="sapUiSmallMargin" visible="true" width="120px" id="lCheckNbr"/>
+			<Input value="{local>/CheckNbr}" valueLiveUpdate="true" width="200px" enabled="true" visible="true" id="CheckNbr"/>
+			</l:HorizontalLayout>
+			<l:HorizontalLayout>
+			<Text xmlns="sap.m" text="Credit Card Nbr" class="sapUiSmallMargin" visible="true" width="120px" id="lCC"/>
+			<Input value="{local>/CreditCard}" valueLiveUpdate="true" width="200px" enabled="true" visible="true" id="CC"/>
+			</l:HorizontalLayout>
+			<l:HorizontalLayout>
+			<Text xmlns="sap.m" text="Expiration Date" class="sapUiSmallMargin" visible="true" width="120px" id="lExpDt"/>
+			<Input valueLiveUpdate="true" width="200px" enabled="true" visible="true" value="{local>/Expiration}" id="ExpDt"/>
+			</l:HorizontalLayout>
+			<l:HorizontalLayout>
+			<Text xmlns="sap.m" text="Security Code" class="sapUiSmallMargin" visible="true" width="120px" id="lSecCode"/>
+			<Input valueLiveUpdate="true" width="200px" enabled="true" visible="true" value="{local>/SecurityCode}" id="SecCode"/>
+			</l:HorizontalLayout>
+			<l:HorizontalLayout>
+			<Text xmlns="sap.m" text="Payment Amt" class="sapUiSmallMargin" visible="true" width="120px"/>
+			<Input valueLiveUpdate="true" width="200px" enabled="true" visible="true" value="{local>/Payment}" editable="false"/>
+			</l:HorizontalLayout>
+			
+			<Button text="Submit Payment" width="200px" id="btnSubmit" icon="sap-icon://activities" press="onConfirmPayment" visible="true"/>
+			</l:VerticalLayout>
+			</content>
+		</Panel>
+		</content>
+	</Page>
+</mvc:View>

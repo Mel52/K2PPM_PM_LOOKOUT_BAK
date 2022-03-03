@@ -1,0 +1,50 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "sendWelcomeFileRedirect": true,
+  "routes": [
+    {
+      "path": "/destinations/key2p",
+      "target": {
+        "type": "destination",
+        "name": "key2p"
+      },
+      "description": "key2p"
+    },
+    {
+      "path": "/destinations/hanab1vm2",
+      "target": {
+        "type": "destination",
+        "name": "hanab1vm2"
+      },
+      "description": "hanab1vm2"
+    },
+    {
+      "path": "/destinations/hanab1vm2XS",
+      "target": {
+        "type": "destination",
+        "name": "hanab1vm2XS"
+      },
+      "description": "hanab1vm2XS"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.77.2"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.77.2"
+      },
+      "description": "SAPUI5 Test Resources"
+    }
+  ]
+}

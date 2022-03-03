@@ -1,0 +1,258 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.Maintenance"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	busyIndicatorDelay="0"
+	>
+	<Page id="workOrderPage" title="{i18n>workOrder}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding k2pPage" >
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<VBox id="VBox" class="sapUiSmallMargin">
+			<f:Form id="mainForm" editable="true" visible="true">
+				<f:title>
+					<core:Title text="{i18n>workOrder}" />
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Number">
+								<f:fields>
+									<Input value="{workOrder>/DocNum}" id="WorkOrderID" editable="false" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Status">
+								<f:fields>
+									<Select id="Status" selectedKey="{workOrder>/U_Status}">
+										<items>
+											<core:Item text="Pending" key="P"/>
+											<core:Item text="Assigned" key="S"/>
+											<core:Item text="Active" key="A"/>
+											<core:Item text="Hold" key="-3"/>
+											<core:Item text="Closed" key="C"/>
+											<core:Item text="Terminated" key="T"/>
+											<core:Item text="Re-Opened" key="R"/>
+										</items>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Priority">
+								<f:fields>
+									<Select id="Priority" selectedKey="{workOrder>/U_Priority}">
+										<items>
+											<core:Item text="Low" key="L"/>
+											<core:Item text="Medium" key="M"/>
+											<core:Item text="High" key="H"/>
+										</items>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Subject">
+								<f:fields>
+									<Input value="{workOrder>/U_Descr}" id="Subject"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Details">
+								<f:fields>
+									<Input value="{workOrder>/U_Details}" id="Details"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Program">
+								<f:fields>
+									<Input value="{workOrder>/U_ProjCode}" id="ProjCode"
+									placeholder="Enter Project"
+                                    showSuggestion="true"
+                                    showValueHelp="true"
+			                        valueHelpRequest=".onValueHelpRequest"
+                                    suggestionItems="{path: '/Projects' , parameters: {$select: 'Code,Name'}}">
+										<suggestionItems>
+											<core:ListItem text="{Code}" additionalText="{Name}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Property">
+								<f:fields>
+									<Input value="{workOrder>/U_Property}" id="Property"
+									placeholder="Enter Property"
+                                    showSuggestion="true"
+                                    suggestionItems="{path: '/UDO_K2P_PROPERTY'}">
+										<suggestionItems>
+											<core:ListItem text="{Code}" additionalText="{Name}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Unit">
+								<f:fields>
+									<Input value="{workOrder>/U_Unit}" id="Unit"  />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Lease">
+								<f:fields>
+									<Input value="{workOrder>/U_Lease}" id="Lease"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Tenant">
+								<f:fields>
+									<Input value="{workOrder>/U_CardCode}" id="Tenant"
+									placeholder="Enter Tenant"
+
+                                    suggestionItems="{path: '/BusinessPartners'}">
+										<suggestionItems>
+											<core:ListItem text="{CardCode}" additionalText="{CardName}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Manager">
+								<f:fields>
+									<Input value="{workOrder>/U_Manager}" id="Manager"
+									placeholder="Enter Manager"
+                                    showSuggestion="true"
+                                    suggestionItems="{path: '/Users'}">
+										<suggestionItems>
+											<core:ListItem text="{UserCode}" additionalText="{UserName}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Technician">
+								<f:fields>
+									<Input value="{workOrder>/U_Technician}" id="Tech"
+									placeholder="Enter Technician"
+                                    showSuggestion="true"
+                                    suggestionItems="{path: '/Users'}">
+										<suggestionItems>
+											<core:ListItem text="{UserCode}" additionalText="{UserName}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Estimated Hours">
+								<f:fields>
+									<Input value="{workOrder>/U_EstHrs}" id="EstimatedHours"  />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Actual Hours">
+								<f:fields>
+									<Input value="{workOrder>/U_ActHrs}" id="ActualHours"  />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Creation Date">
+								<f:fields>
+									<DatePicker id="DP1" value="{workOrder>/U_CreateDt}" width="200px" enabled="true" visible="true"  
+			                            displayFormat="{i18n>dateDisplayFormat}"  displayFormatType="{i18n>dateDisplayFormatType}" valueFormat="yyyy-MM-dd"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Start Date" >
+								<f:fields>
+									<DatePicker id="DP2" value="{workOrder>/U_StartDt}" width="200px" enabled="true" visible="true"  
+			                            displayFormat="{i18n>dateDisplayFormat}"  displayFormatType="{i18n>dateDisplayFormatType}" valueFormat="yyyy-MM-dd"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Completed Date" >
+								<f:fields>
+									<DatePicker id="DP3" value="{workOrder>/U_EndDt}" width="200px" enabled="true" visible="true"  
+			                            displayFormat="{i18n>dateDisplayFormat}"  displayFormatType="{i18n>dateDisplayFormatType}" valueFormat="yyyy-MM-dd"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Created By">
+								<f:fields>
+									<Input value="{workOrder>/U_CreateByName}"  enabled="false" id="CreateByName"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			<HBox>
+				<Button text="Task"  id="btnAddTask" icon="sap-icon://add" press="onAddTask" visible="true" class="sapUiResponsiveMargin"/>
+				<Button text="OK"  id="btnSubmit" icon="sap-icon://save" press="onSubmit" visible="true" class="sapUiResponsiveMargin"/>
+				<!--<Button text="Approve Work Order"  id="btnApprove" icon="save://activities" press="onApprove" visible="true" class="sapUiResponsiveMargin"/>
+				items="{path: 'workOrder>/K2P_WO_TASKSCollection' }"
+				items="{ path: '/value' }" -->
+			</HBox>
+			<Panel id="pnlWoTasks">
+				<Table id="idTasksTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChangeTasks"
+				   	items="{path: 'workOrder>/K2P_WO_TASKSCollection' }"
+				   	>
+					<headerToolbar></headerToolbar>
+					<columns>
+						<Column >
+							<Text text="#" />
+						</Column>
+						<Column minScreenWidth="Desktop">
+							<Text text="Task"/>
+						</Column>
+						<Column >
+							<Text text="Technician" />
+						</Column>
+						<Column >
+							<Text text="Details" />
+						</Column>
+						<Column >
+							<Text text="Scheduled"/>
+						</Column>
+						<Column >
+							<Text text="Start" />
+						</Column>
+						<Column >
+							<Text text="End" />
+						</Column>
+						<Column >
+							<Text text="Duration" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Input value="{LineId}" editable="false"/>
+								<Input value="{U_Descr}"/>
+								<Input value="{U_Technician}"/>
+								<Input value="{U_Details}"/>
+								<Input value="{U_ScheduleDt}"/>
+								<Input value="{U_StartDt}"/>
+								<Input value="{U_EndDt}"/>
+								<Input value="{U_Duration}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+			<HBox>
+				<Button text="Requests"  id="btnRequest" icon="save://activities" press="onRequest" visible="true" class="sapUiResponsiveMargin"/>
+				<Button text="Approved"  id="btnApproved" icon="save://activities" press="onApproved" visible="true" class="sapUiResponsiveMargin"/>
+				<Button text="Inventory"  id="btnInventory" icon="save://activities" press="onInventory" visible="true" class="sapUiResponsiveMargin"/>
+			</HBox>
+		</VBox>
+		<Button text="Take Picture"  id="btnPhoto" icon="sap-icon://add-photo" press="onSubmit" visible="false"/>
+	</Page>
+</mvc:View>

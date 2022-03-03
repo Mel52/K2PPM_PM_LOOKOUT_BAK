@@ -1,0 +1,129 @@
+<mvc:View controllerName="K2PPM_PM.controller.WorkOrderList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="ServiceCallPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<Panel id="pnlWorkOrder" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>workOrders}"  expandable="true" expanded="true">
+					<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange"
+                        items="{path: '/UDO_K2P_WORKORDER', parameters: {$filter: '(U_Status eq \'P\' or U_Status eq \'A\') and (U_Manager eq \'manager\' or U_Technician eq \'manager\')', $orderby: 'DocNum desc'}}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="{i18n>workOrders}" level="H2"/>
+									<ToolbarSpacer/>
+									<Button
+											id="refreshApprovalsButton"
+											text="My Approvals"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".myApprovals"/>
+									<Button
+											id="refreshRequestsButton"
+											text="My Work Orders"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".myWorkOrders"/>
+									<Button
+											id="refreshWorkOrders"
+											text="All Work Orders"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".allWorkOrders"/>
+									<!--<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="{i18n>property}"
+											search=".onSearch"></SearchField>
+									<Button
+											id="refreshButton"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".onRefresh"/>
+									<Button
+											id="sortUsersButton"
+											press=".onSort"
+											tooltip="{i18n>sortButtonText}"
+											icon="sap-icon://sort"/>
+									<ToolbarSpacer/>
+									<Button
+											id="addButton"
+											press=".onAdd"
+											tooltip="{i18n>addButtonText}"
+											icon="sap-icon://add"/>
+									<Button
+											id="refreshUserButton"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".onRefresh"/>-->
+									<ToolbarSpacer/>
+									<ToolbarSpacer/>
+									<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column >
+								<Text text="Edit" width="30px"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="Work Order" width="60px"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="Status" width="60px"/>
+							</Column>
+							<Column >
+								<Text text="Subject" />
+							</Column>
+							<Column >
+								<Text text="Tenant" />
+							</Column>
+							<Column >
+								<Text text="Property"/>
+							</Column>
+							<Column >
+								<Text text="Lease" />
+							</Column>
+							<Column >
+								<Text text="ID" width="0px" visible="false" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<Button id="btnLines" icon="sap-icon://detail-view" press="onEditLine" visible="true" width="30px"/>
+								<cells>
+									<Text text="{DocNum}" width="60px"/>
+									<Select id="Status" selectedKey="{U_Status}" enabled="false">
+										<items>
+											<core:Item text="Pending" key="P"/>
+											<core:Item text="Approved" key="S"/>
+											<core:Item text="Active" key="A"/>
+											<core:Item text="Hold" key="H"/>
+											<core:Item text="Completed" key="M"/>
+											<core:Item text="Closed" key="C"/>
+											<core:Item text="Terminated" key="T"/>
+											<core:Item text="Re-Opened" key="R"/>
+										</items>
+									</Select>
+									<Text text="{U_Descr}"/>
+									<Text text="{U_CardName}"/>
+									<Text text="{U_Property}"/>
+									<Text text="{U_Lease}"/>
+									<Text id="DocEntry" text="{DocEntry}" width="0px"  visible="false"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<!--<Toolbar><Button press="onNavLogout" text="Logout"/><ToolbarSpacer/><Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/><ToolbarSpacer/><Button press="onNavHome" tooltip="{homeButton}" icon="sap-icon://home"/></Toolbar>-->
+		</footer>
+	</Page>
+</mvc:View>

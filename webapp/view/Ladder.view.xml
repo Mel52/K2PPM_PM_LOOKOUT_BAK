@@ -1,0 +1,87 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.Ladder"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.model.type"
+	busyIndicatorDelay="0"
+	>
+	<Page id="ladderPage" title="{i18n>ladder}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding k2pPage" >
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<VBox id="VBox" class="sapUiSmallMargin">
+			<f:Form id="mainForm" editable="true" visible="true">
+				<f:title>
+					<core:Title text="{i18n>ladder}" />
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Ladder">
+								<f:fields>
+									<Input value="{Code}" id="Ladder" editable="false" />
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			<HBox>
+				<Button text="{i18n>AddItemButtonText}"  id="btnAddItem" icon="sap-icon://add" press="onAddItem" visible="true" class="sapUiResponsiveMargin"/>
+				<Button text="{i18n>saveButtonText}"  id="btnSubmit" icon="sap-icon://save" press="onSubmit" visible="true" class="sapUiResponsiveMargin"/>
+			</HBox>
+			<!-- , parameters : {$$updateGroupId : 'UpdateGroup1'}-->
+			<Panel id="pnlLadderLines">
+				<Table id="ladderLines" inset="false" mode="SingleSelectMaster" includeItemInSelection="false" selectionChange="onSelectionChangeLines"
+				   	items="{path: '/UDO_K2P_APRV_LINES'}">
+				   	<headerToolbar></headerToolbar>
+					<columns>
+						<Column minScreenWidth="Desktop">
+							<Text text="Ladder"/>
+						</Column>
+						<Column >
+							<Text text="Role" />
+						</Column>
+						<Column >
+							<Text text="Amount" />
+						</Column>
+
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Input value="{path: 'U_Ladder',targetType: 'any'}" editable="false"/>
+								<Input value="{path: 'U_Role',targetType: 'any'}" editable="false"/>
+								<Input value="{path: 'U_Amt', targetType: 'any'}"  editable="true"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</VBox>
+		<Button text="Take Picture"  id="btnPhoto" icon="sap-icon://add-photo" press="onSubmit" visible="false"/>
+	</Page>
+</mvc:View>

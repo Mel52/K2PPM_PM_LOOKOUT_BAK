@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectProperty"
+		title="Properties"
+		items="{path: '/UDO_K2P_PROPERTY' , parameters: {$select: 'Code,Name,U_Addr1'}}"
+		search=".onValueHelpSearch"
+		confirm=".onValueHelpClose"
+		cancel=".onValueHelpClose">
+		<StandardListItem
+			title="{Code}"
+			description="{Name}" />
+	</SelectDialog>
+</core:FragmentDefinition>

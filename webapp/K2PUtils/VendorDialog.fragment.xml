@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectVendor"
+		title="Vendor"
+		items="{path: '/BusinessPartners' , parameters: {$select: 'CardCode,CardName', $filter: 'CardType eq \'cSupplier\' and Frozen ne \'tYES\'', $orderby : 'CardName'}}"
+		search=".onValueHelpSearch"
+		confirm=".onValueHelpClose"
+		cancel=".onValueHelpClose">
+		<StandardListItem
+			title="{CardName}"
+			description="{CardCode}" />
+	</SelectDialog>
+</core:FragmentDefinition>

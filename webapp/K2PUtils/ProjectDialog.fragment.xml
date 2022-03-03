@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectProject"
+		title="Projects"
+		items="{path: '/ProjectManagements' , parameters: {$select: 'ProjectName,FinancialProject,U_K2P_DIM3'}}"
+		search=".onValueHelpSearch"
+		confirm=".onValueHelpClose"
+		cancel=".onValueHelpClose">
+		<StandardListItem
+			title="{FinancialProject}"
+			description="{U_K2P_DIM3}" />
+	</SelectDialog>
+</core:FragmentDefinition>

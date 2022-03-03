@@ -1,0 +1,149 @@
+<mvc:View controllerName="K2PPM_PM.controller.PurchaseOrderList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="PurchaseOrderListPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<Panel id="pnlPurchaseOrders" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="Purchase Orders"  expandable="true" expanded="true">
+					<Table id="idMainTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChange" 
+					items="{path: '/PurchaseOrders' , parameters: {$orderby: 'DocNum desc', $filter: 'DocNum eq -1'}}"
+					>
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Purchase Orders" level="H2"/>
+									<ToolbarSpacer/>
+									<Input id="property"
+    								value="{purchaseOrderView>/propertyName}" 
+									placeholder="{i18n>property}"
+									textFormatMode="Value"
+                                    showSuggestion="true"
+                                    showValueHelp="false"
+                                    width="200px"
+                                    maxSuggestionWidth = "60em"
+                                    suggestionRows="{path: '/UDO_K2P_PROPERTY', parameters: {$select : 'Name,Code,U_ProjCode',$orderby : 'Name'}}"
+                                    suggestionItemSelected=".onSuggestionItemSelectedProperty"
+                                    >
+										<suggestionColumns>
+											<Column>
+												<Label text="Property" />
+											</Column>
+											<Column>
+												<Label text="Code" />
+											</Column>
+											<Column visible="false">
+												<Label text="Project" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{Name}" />
+												<Label text="{Code}" />
+												<Label text="{U_ProjCode}"  visible="false"/>
+											</ColumnListItem>
+										</suggestionRows>
+									</Input>
+									<CheckBox text = "Open" selected="{purchaseOrderView>/open}" editable="true"/>
+									<CheckBox text = "Exclude Ordered" selected="{purchaseOrderView>/excludeOrdered}" editable="true"/>
+									<Button
+											id="refreshButton"
+											visible="true"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".onRefresh"/>
+
+									<Button
+											id="sortUsersButton"
+											visible="false"
+											press=".onSort"
+											tooltip="{i18n>sortButtonText}"
+											icon="sap-icon://sort"/>
+									<ToolbarSpacer/>
+									<Button
+											id="addButton"
+											visible="false"
+											press=".onAdd"
+											tooltip="{i18n>addButtonText}"
+											text="{i18n>AddItemButtonText}" 
+											icon="sap-icon://add"/>  
+									<ToolbarSpacer/>
+									<ToolbarSpacer/>
+									<core:Fragment id="paginationFrag" fragmentName="K2PPM_PM.K2PUtils.pagination" type="XML"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column >
+								<Text text="Edit"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="PO #" />
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="Status"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="Cancelled"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="Property"/>
+							</Column>
+							<Column >
+								<Text text="Subject" />
+							</Column>
+							<Column >
+								<Text text="Vendor Name"/>
+							</Column>
+							<Column >
+								<Text text="Amount" />
+							</Column>
+							<Column >
+								<Text text="Vendor Ordered" width="30em"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<Button id="btnLines" icon="sap-icon://detail-view" press="onEditLine" visible="true"/>
+								<cells>
+									<Input value="{path: 'DocNum', targetType: 'any'}" enabled="false"/>
+									<Select id="Status" selectedKey="{path: 'DocumentStatus', targetType: 'any'}" enabled="false">
+										<items>
+											<core:Item text="Open" key="bost_Open"/>
+											<core:Item text="Closed" key="bost_Close"/>
+										</items>
+									</Select>
+									<Select id="Cancelled" selectedKey="{path: 'Cancelled', targetType: 'any'}" enabled="false">
+										<items>
+											<core:Item text="Yes" key="tYES"/>
+											<core:Item text="No" key="tNO"/>
+										</items>
+									</Select>
+									<Input value="{U_K2P_Property}"  enabled="false"/>
+									<Input value="{Comments}"  enabled="false"/>
+									<Input value="{CardName}"  enabled="false"/>
+									<Input value="{DocTotal}"  enabled="false"/>
+									<DatePicker value="{U_K2P_OrderedDate}"  enabled="false" id="OrderedDate" width="25em"  displayFormatType="{i18n>dateDisplayFormatType}" valueFormat="yyyy-MM-dd" />
+									<Text id="DocEntry" text="{DocEntry}" width="0px"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

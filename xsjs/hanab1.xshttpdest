@@ -1,0 +1,10 @@
+description = "B1 SL https connection";
+host = "hanab1";
+port = 50000;
+pathPrefix = "/b1s/v2/";
+proxyType = none;
+proxyHost = "";
+proxyPort = 0;
+authType = basic;
+useSSL = true;
+timeout = 0;

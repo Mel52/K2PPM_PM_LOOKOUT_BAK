@@ -1,0 +1,114 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.ChargeTypes"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	busyIndicatorDelay="0"
+	xmlns:smartField="sap.ui.comp.smartfield"
+	>
+	<Page id="statementPage" title="{i18n>chargeTypes}"  class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<Panel id="pnlChargeTypes" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>chargeTypes}">
+				<content>
+					<Table
+							id="chargeTypesTable"
+							growing="true"
+							growingThreshold="10"
+							items="{
+								path: '/UDO_K2P_CHRGTYPE',
+								parameters: {
+									$count: true
+								}
+							}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<ToolbarSpacer/>
+									<SearchField
+											id="searchField"
+											width="20%"
+											placeholder="{i18n>searchFieldPlaceholder}"
+											search=".onSearch"/>
+									<Button
+											id="addUserButton"
+											icon="sap-icon://add"
+											tooltip="{i18n>createButtonText}"
+											press=".onCreate">
+										<layoutData>
+											<OverflowToolbarLayoutData priority="NeverOverflow"/>
+										</layoutData>
+									</Button>
+									<Button
+											id="refreshUsersButton"
+											icon="sap-icon://refresh"
+											tooltip="{i18n>refreshButtonText}"
+											press=".onRefresh"/>
+									<Button
+											id="sortUsersButton"
+											press="onSort"
+											tooltip="{i18n>sortButtonText}"
+											icon="sap-icon://sort"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column id="chargeTypesCode">
+								<Text text="{i18n>chargeTypesCode}"/>
+							</Column>
+							<Column id="chargeTypesName">
+								<Text text="{i18n>chargeTypesName}"/>
+							</Column>
+							<Column id="chargeTypesEscrow">
+								<Text text="{i18n>chargeTypeAmt}"/>
+							</Column>
+							<Column id="chargeTypesBillFreq">
+								<Text text="{i18n>chargeTypesBillFreq}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Input value="{Code}"/>
+								</cells>
+								<cells>
+									<Input value="{Name}"/>
+								</cells>
+								<cells>
+									<Input value="{U_Amt}"/>
+								</cells>
+								<cells>
+									<Input value="{U_BillFreq}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Panel>
+			<!--<Button text="Test Now" width="200px" id="TestNow" icon="sap-icon://activities" visible="true" press="onTestNow"/>
+			"{= ${message>/}.length === 0 && ${appView>/usernameEmpty} === false }"
+			-->
+		</content>
+		<footer>
+			<!--<core:Fragment id="footerFrag" fragmentName="K2PPM_PM.K2PUtils.customFooter" type="XML"/>"{= ${message>/}.length === 0 && ${appView>/usernameEmpty} === false }"-->
+						<Toolbar visible="{appView>/hasUIChanges}">
+							<ToolbarSpacer/>
+							<Button
+								id="saveButton"
+								type="Emphasized"
+								text="{i18n>saveButtonText}"
+								enabled= "true"
+																press=".onSave"/>
+							<Button
+								id="doneButton"
+								text="{i18n>cancelButtonText}"
+								press=".onResetChanges"/>
+						</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

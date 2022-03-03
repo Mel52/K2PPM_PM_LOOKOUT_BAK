@@ -1,0 +1,41 @@
+sap.ui.define([
+	"K2PPM_Tn/controller/BaseController",
+	"K2PPM_Tn/K2PUtils/K2PUtils"
+], function(BaseController, K2PUtils) {
+	"use strict";
+
+	return BaseController.extend("K2PPM_Tn.controller.Home", {
+
+		LogInOut: function(oEvent) {
+			var thisView = this.getView();
+
+			var localModel = thisView.getModel("local");
+			var loginInfo = {};
+			loginInfo.UserName = localModel.getProperty("/uID");
+			loginInfo.Password = localModel.getProperty("/uPassword");
+
+	        var lLabel = thisView.byId("LabelLogin");
+			K2PUtils.checkXS(lLabel);
+		
+
+
+		},
+
+		onDisplayNotFound: function(oEvent) {
+			// display the "notFound" target without changing the hash
+			this.getRouter().getTargets().display("notFound", {
+				fromTarget: "home"
+			});
+		},
+
+		onNavToEmployees: function(oEvent) {
+			this.getRouter().navTo("employeeList");
+		},
+
+		onNavToEmployeeOverview: function(oEvent) {
+			this.getRouter().navTo("employeeOverview");
+		}
+
+	});
+
+});

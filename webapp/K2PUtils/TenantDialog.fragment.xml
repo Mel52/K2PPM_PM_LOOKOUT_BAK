@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectTenant"
+		title="Tenant"
+		items="{path: '/UDO_K2P_LEASE' , parameters: {$select: 'U_CardCode, U_CardName', $filter : 'U_Property eq \'xyz1\'', $orderby : 'U_CardName'}}"
+		search=".onValueHelpSearch"
+		confirm=".onValueHelpClose"
+		cancel=".onValueHelpClose">
+		<StandardListItem
+			title="{U_CardName}"
+		    description="{U_CardCode}"
+			 />
+	</SelectDialog>
+</core:FragmentDefinition>

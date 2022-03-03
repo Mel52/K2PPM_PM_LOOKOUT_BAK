@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		id="selectChargeType"
+		title="Charge Types"
+		items="{path: '/UDO_K2P_CHRGTYPE' , parameters: {$select: 'Code,Name,U_Account,U_AcctSys', $filter : 'U_PO eq \'Y\''}}"
+		search=".onValueHelpSearch"
+		confirm=".onValueHelpClose"
+		cancel=".onValueHelpClose"
+		multiSelect="false"
+		showClearButton="true">
+		<ColumnListItem>
+			<cells>
+				<Text text="{Code}" />
+				<Text text="{Name}" />
+				<Text text="{U_Account}" />
+				<Text text="{U_AcctSys}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<Text text="Charge Type" />
+			</Column>
+			<Column	hAlign="Center">
+				<Text text="Description" />
+			</Column>
+			<Column hAlign="End">
+				<Text text="Account" />
+			</Column>
+			<Column hAlign="End">
+				<Text text="Sys Account" />
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

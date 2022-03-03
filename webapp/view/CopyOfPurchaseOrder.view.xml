@@ -1,0 +1,495 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.PurchaseOrder"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.model.type"
+	busyIndicatorDelay="0"
+	>
+	<Page id="purchaseOrderPage" title="{i18n>purchaseOrder}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding k2pPage" >
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<VBox id="VBox" class="sapUiSmallMargin">
+			<f:Form id="mainForm" editable="true" visible="true">
+				<f:title>
+					<core:Title text="{i18n>purchaseOrder}" />
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Number">
+								<f:fields>
+									<Input value="{purchaseOrder>/DocNum}" id="purchaseOrderID" editable="false" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Request ID">
+								<f:fields>
+									<Input id = "DraftDocentry" value="{purchaseOrder>/U_K2P_DraftDocentry}" enabled="false"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Approved">
+								<f:fields>
+									<Select id="Approved" selectedKey="{purchaseOrderView>/U_K2P_Approved}" editable="false">
+										<items>
+											<core:Item text="Yes" key="Y"/>
+											<core:Item text="No" key="N"/>
+										</items>
+									</Select>	
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Status">
+								<f:fields>
+									<Select id="POStatus" selectedKey="{purchaseOrder>/DocumentStatus}"  editable="false">
+										<items>
+											<core:Item text="Open" key="bost_Open"/>
+											<core:Item text="Closed" key="bost_Close"/>
+										</items>
+										<core:Item key="{Code}" text="{Code}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Ladder">
+								<f:fields>
+									<Select id="Ladder" 
+									    forceSelection="false"
+									    selectedKey="{purchaseOrder>/U_K2P_Ladder}"
+                                        items="{path: '/UDO_K2P_APRV_LADDER', sorter: { path: 'Code' }}"
+	                                       >
+										<core:Item key="{Code}" text="{Code}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Property">
+								<f:fields>
+									<Input value="{purchaseOrder>/U_K2P_Property}" id="Property1"
+									placeholder="Enter Property"
+                                    showSuggestion="true"
+                                    suggestionItems="{path: '/UDO_K2P_PROPERTY'}">
+										<suggestionItems>
+											<core:ListItem text="{Code}" additionalText="{Name}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Program">
+								<f:fields>
+									<Input value="{purchaseOrder>/U_K2P_ProjCode}" id="ProjCode1"
+									placeholder="Enter Program"
+                                    showSuggestion="true"
+			                        valueHelpRequest=".onValueHelpRequest"
+			                        suggestionItemSelected=".onSuggestionItemSelectedProjCode"
+                                    suggestionItems="{path: '/Projects' , parameters: {$select: 'Code,Name'}}">
+										<suggestionItems>
+											<core:ListItem text="{Code}" additionalText="{Name}" />
+										</suggestionItems>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Vendor">
+								<f:fields>
+									<Input id="Vendor"
+									value="{purchaseOrder>/CardName}" 
+									placeholder="Enter Vendor"
+									showSuggestion="true"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".onValueHelpRequestVendor"
+                                    suggestionRows="{path: '/BusinessPartners', templateShareable:false, parameters: {$filter : 'CardType eq \'cSupplier\''}}"
+                                    suggestionItemSelected=".onSuggestionItemSelectedVendor"
+                                    >
+										<suggestionColumns>
+											<Column>
+												<Label text="Name" />
+											</Column>
+											<Column>
+												<Label text="Vendor ID" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{CardName}" />
+												<Label text="{CardCode}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</Input>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Vendor Code" visible="false">
+								<f:fields>
+									<Input value="{purchaseOrder>/CardCode}"  enabled="false" id="VendorCode" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Comments">
+								<f:fields>
+									<Input value="{purchaseOrder>/Comments}"  enabled="true" id="Comments"/>
+								</f:fields>
+							</f:FormElement>
+
+							<f:FormElement label="Order Date">
+								<f:fields>
+									<DatePicker value="{purchaseOrder>/DocDate}"  enabled="true" id="DocDate"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Due Date">
+								<f:fields>
+									<DatePicker value="{purchaseOrder>/DocDueDate}"  enabled="true" id="DocDueDate" valueFormat="yyyy-MM-dd"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Vendor Reference">
+								<f:fields>
+									<Input value="{purchaseOrder>/NumAtCard}"  enabled="true" id="NumAtCard"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Total">
+								<f:fields>
+									<Input value="{purchaseOrder>/DocTotal}"  enabled="false" id="DocTotal"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Created By">
+								<f:fields>
+									<Input value="{purchaseOrder>/U_K2P_CreateByName}"  enabled="false" id="CreateByName"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Approved By">
+								<f:fields>
+									<Input value="{purchaseOrder>/U_K2P_ApprovedByName}"  enabled="false" id="ApprovedByName"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Approved By Date">
+								<f:fields>
+									<DatePicker value="{purchaseOrder>/U_K2P_ApprovedDate}"  enabled="false" id="ApprovedByDate"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Approval Limit">
+								<f:fields>
+									<Input value="{purchaseOrderView>/approvalLimit}" enabled="false"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Approval Role">
+								<f:fields>
+									<Input value="{purchaseOrderView>/approvalRole}" enabled="false"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Type">
+								<f:fields>
+									<Select id="DocType" selectedKey="{purchaseOrder>/DocType}"  editable="false">
+										<items>
+											<core:Item text="Service" key="dDocument_Service"/>
+											<core:Item text="Item" key="dDocument_Items"/>
+										</items>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Work Order">
+								<f:fields>
+									<Input id = "WODocNum" value="{purchaseOrder>/U_K2P_WODocNum}" enabled="false"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			<HBox>
+				<Button text="{i18n>saveButtonText}"  id="btnSubmit" icon="sap-icon://save" press="onSubmit" visible="true" class="sapUiResponsiveMargin"/>
+				<Button text="{i18n>approveButtonText}"  id="btnApprove" icon="sap-icon://save" press="onApprove" visible="true" class="sapUiResponsiveMargin"/>
+				<Button text="{i18n>declineButtonText}" icon="sap-icon://save" press="onApprove" visible="true" class="sapUiResponsiveMargin"/>
+
+			</HBox>
+			<Text text="Approval Comment"/>
+				<Input value="{purchaseOrderView>/approvalComment}" enabled="true"/>
+			<HBox>
+			</HBox>
+			<!-- , parameters : {$$updateGroupId : 'UpdateGroup1'} -->
+			<Panel id="pnlDocumentLines">
+				<content>
+					<ScrollContainer
+		height="100%"
+		width="100%"
+		vertical="true"
+		focusable="true">
+						<Table id="DocumentLines" inset="false" mode="SingleSelectMaster" includeItemInSelection="true" selectionChange="onSelectionChangeLines"
+				items="{path: 'purchaseOrder>/DocumentLines'}"
+				   	>
+							<headerToolbar>
+								<OverflowToolbar>
+									<content>
+										<Button text="{i18n>AddLineButtonText}"  id="btnAddItem" icon="sap-icon://add" press="onAddItem" visible="true" class="sapUiResponsiveMargin"/>
+										<Button text="Add Blank Line"  id="btnAddBlank" icon="sap-icon://add" press="onAddItem" visible="true" class="sapUiResponsiveMargin"/>
+										<Button text="{i18n>deleteButtonText}"  id="btnDeleteItem" icon="sap-icon://delete" press="onDeleteItem" visible="true" class="sapUiResponsiveMargin"/>
+										<Button text="Reset Total"  id="btnResetTotal" icon="sap-icon://add" press="onResetTotal" visible="true" class="sapUiResponsiveMargin"/>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column	width="12em">
+									<Text text="Account" />
+								</Column>
+								<Column width="12em">
+									<Text text="Description"/>
+								</Column>
+								<Column width="12em">
+									<Text text="Quantity" />
+								</Column>
+								<Column width="12em">
+									<Text text="Total"/>
+								</Column>
+								<Column	width="12em">
+									<Text text="Program" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Tenant Name" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Tenant" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Lease" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Property Name" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Property" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Unit" />
+								</Column>
+								<Column	width="9em">
+									<Text text="CC Code " />
+								</Column>
+								<Column	width="9em">
+									<Text text="Funder" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Location" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Department" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Division" />
+								</Column>
+								<Column	width="9em">
+									<Text text="Tax Code" />
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Input id = "K2P_AccountName" value="{purchaseOrder>U_K2P_AcctName}"  editable="true" 	width="12em"
+									placeholder="Enter Account"
+								    enabled="true"  
+									showSuggestion="true"
+									maxSuggestionWidth = "60em"
+                                    suggestionRows="{path: '/ChartOfAccounts', parameters: {$filter : 'ActiveAccount eq  \'Y\''}, templateShareable:false}"
+                                    suggestionItemSelected=".onSuggestionItemSelectedAccount"
+									>
+											<suggestionColumns>
+												<Column>
+													<Label text="Account" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Number" />
+												</Column>
+												<Column hAlign="End">
+													<Label text="Sys Code" visible="false" />
+												</Column>
+											</suggestionColumns>
+											<suggestionRows>
+												<ColumnListItem>
+													<Label text="{Name}" />
+													<Label text="{FormatCode}" />
+													<Label text="{Code}" visible="false" />
+												</ColumnListItem>
+											</suggestionRows>
+										</Input>
+										<Input value="{purchaseOrder>ItemDescription}"  editable="true"/>
+										<Input value="{purchaseOrder>U_K2P_QtyService}"  editable="true"/>
+										<Input value="{purchaseOrder>LineTotal}"  editable="true"/>
+										<Input id="Project1" value="{purchaseOrder>ProjectCode}"  editable="true" 	width="12em"
+									        placeholder="Enter Program"
+								            enabled="true"  
+    									    showSuggestion="true"
+								        	maxSuggestionWidth = "60em"
+                                            suggestionRows="{path: '/ProjectManagements', templateShareable: false}"
+                                            suggestionItemSelected=".onSuggestionItemProject"
+									>
+											<suggestionColumns>
+												<Column>
+													<Label text="Program" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="CC Code" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Funder" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Location" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Department" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Division" />
+												</Column>
+											</suggestionColumns>
+											<suggestionRows>
+												<ColumnListItem>
+													<Label text="{FinancialProject}" />
+													<Label text="{U_K2P_DIM1}" />
+													<Label text="{U_K2P_DIM2}" />
+													<Label text="{U_K2P_DIM3}" />
+													<Label text="{U_K2P_DIM4}" />
+													<Label text="{U_K2P_DIM5}" />
+												</ColumnListItem>
+											</suggestionRows>
+										</Input>
+										<Input  id = "K2P_TenantName" value="{purchaseOrder>U_K2P_TenantName}"  editable="true" 	width="12em"
+									        placeholder="Enter Tenant"
+								            enabled="true"  
+    									    showSuggestion="true"
+								        	maxSuggestionWidth = "60em"
+                                            suggestionRows="{path: '/BusinessPartners', parameters: {$filter : 'CardType eq \'cCustomer\''}, templateShareable:false}"
+                                            suggestionItemSelected=".onSuggestionItemSelectedTenant"
+									>
+											<suggestionColumns>
+												<Column>
+													<Label text="Tenant Name" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Tenant ID" />
+												</Column>
+											</suggestionColumns>
+											<suggestionRows>
+												<ColumnListItem>
+													<Label text="{CardName}" />
+													<Label text="{CardCode}" />
+												</ColumnListItem>
+											</suggestionRows>
+										</Input>
+										<Input value="{purchaseOrder>U_K2P_Tenant}"  editable="false"/>
+										<Input value="{purchaseOrder>U_K2P_Lease}"  editable="true"/>
+										<!--<Input value="{purchaseOrder>U_K2P_PropertyName}"  editable="true"/>-->
+										<Input id="PropertyName" 
+									        value="{purchaseOrder>/U_K2P_PropertyName}"
+									        placeholder="Enter Property"
+									        
+                                            showSuggestion="true"
+                                            showValueHelp="false"
+                                            valueHelpRequest=".onValueHelpRequestProperty"
+                                            suggestionRows="{path: '/UDO_K2P_PROPERTY', templateShareable:false}"
+                                            suggestionItemSelected=".onSuggestionItemSelectedProperty"
+                                            maxSuggestionWidth = "60em">
+											<suggestionColumns>
+												<Column>
+													<Label text="Name" />
+												</Column>
+												<Column	hAlign="Center">
+													<Label text="Property Code" />
+												</Column>
+												<Column hAlign="Center">
+													<Label text="Address" />
+												</Column>
+												<Column hAlign="End">
+													<Label text="Project" />
+												</Column>
+											</suggestionColumns>
+											<suggestionRows>
+												<ColumnListItem>
+													<Label text="{Name}" />
+													<Label text="{Code}" />
+													<Label text="{U_Addr1}" />
+													<Label text="{U_ProjCode}" />
+												</ColumnListItem>
+											</suggestionRows>
+										</Input>
+										<Input value="{purchaseOrder>U_K2P_Property}"  editable="false"/>
+										<Input value="{purchaseOrder>U_K2P_UnitID}"  editable="true"/>
+										<Input value="{purchaseOrder>CostingCode}"  editable="false"/>
+										<Input value="{purchaseOrder>CostingCode2}"  editable="false"/>
+										<Input value="{purchaseOrder>CostingCode3}"  editable="false"/>
+										<Input value="{purchaseOrder>CostingCode4}"  editable="false"/>
+										<Input value="{purchaseOrder>CostingCode5}"  editable="false"/>
+										<Input value="{purchaseOrder>TaxCode}"  editable="false"	width="9em"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</content>
+			</Panel>
+			<!--path: '/UDO_K2P_APRV_LOG', parameters: {$filter : 'U_DraftEntry eq 48', $orderby : 'DocNum'}  -->
+			<Panel id="pnlApprovals">
+				<content>
+					<Table id="approvalsTable" inset="false" mode="SingleSelectMaster" includeItemInSelection="false" selectionChange="onSelectionChangeLines"
+				   	items="{path: '/UDO_K2P_APRV_LOG', parameters: {$filter : 'U_DraftEntry eq -1', $orderby : 'U_Amt' desc}}">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Approvals" level="H2"/>
+									<ToolbarSpacer/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Desktop">
+								<Text text="Date"/>
+							</Column>
+							<Column >
+								<Text text="Approver" />
+							</Column>
+							<Column >
+								<Text text="Comment" />
+							</Column>
+							<Column >
+								<Text text="Amount" />
+							</Column>
+							<Column >
+								<Text text="Role" />
+							</Column>
+
+						</columns>
+						<items>
+							<ColumnListItem id = "ladderLinesItems">
+								<cells>
+									<DatePicker id="CreateDate2" value="{path: 'CreateDate',targetType: 'any'}" editable="false"/>
+									<Input id ="UserName2" value="{path: 'U_UserName',targetType: 'any'}" editable="false"/>
+									<Input id="Comments2" value="{path: 'U_Comments', targetType: 'any'}"  editable="false"/>
+									<Input id="Amt2" value="{path: 'U_Amt', targetType: 'any'}"  editable="false"/>
+									<Input id="Role2" value="{path: 'U_Role', targetType: 'any'}"  editable="false"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Panel>
+		</VBox>
+	</Page>
+</mvc:View>

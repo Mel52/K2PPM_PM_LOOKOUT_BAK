@@ -1,0 +1,10 @@
+<Toolbar class="k2pHeader" xmlns="sap.m">
+				<Button type="Back" press="onNavBack" tooltip="{i18n>backButton}"/>
+				<Image src="./images/logoSmall.png" width="30px"  id="image0" tooltip="icon"  visible="true"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>companyName}" class="sapUiResponsiveContentPadding"/>
+				<ToolbarSpacer/>
+				<Button press="onUser" tooltip="{i18n>userButton}" icon="sap-icon://person-placeholder"/>
+				<Input id="inpUser" valueLiveUpdate="false" width="auto" enabled="false" value="{userModel>/value/0/UserName}" class="sapUiResponsiveContentPadding"/>
+				<Button press="onNavLogout" text="Logout"/>
+</Toolbar>

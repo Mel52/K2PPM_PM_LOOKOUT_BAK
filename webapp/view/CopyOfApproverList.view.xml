@@ -1,0 +1,125 @@
+<mvc:View controllerName="K2PPM_PM.controller.ApproverList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" busyIndicatorDelay="0">
+	<Page id="RequestListPage" class="k2pPage">
+		<customHeader>
+			<core:Fragment id="headerFrag" fragmentName="K2PPM_PM.K2PUtils.customHeader" type="XML"/>
+		</customHeader>
+		<content>
+			<ScrollContainer height="100%" width="100%" horizontal="true" vertical="true">
+				<!-- mode="SingleSelect" includeItemInSelection="false"
+			mode="MultiSelect" includeItemInSelection="true" 
+			,events: {dataReceived : '.onDataReceived', change: '.onDataChange', DataStateChange: '.onDataStateChange'}
+			-->
+				<Panel id="pnlApproved" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="Property: Test1"  expandable="false" expanded="true">
+					<Table id="idMainTable" inset="false" mode="SingleSelect" includeItemInSelection="false" selectionChange="onSelectionChange"
+					items="{
+					    path: '/UDO_K2P_APRV_USERS',  
+					    parameters: {$$updateGroupId : 'UpdateBatchGroup1', $filter : 'DocNum eq \'-1\'' }} 
+						
+						}" >
+						<headerToolbar>
+							<!--<OverflowToolbar>
+								<content>
+									<Input id="property"
+    								value="{local>/property}" 
+									placeholder="Property"
+									textFormatMode="Value"
+                                    showSuggestion="true"
+                                    showValueHelp="false"
+			                        valueHelpRequest=".onValueHelpRequest"
+                                    width="350px"
+                                    maxSuggestionWidth = "60em"
+                                    suggestionRows="{path: '/UDO_K2P_PROPERTY'"
+                                    suggestionItemSelected=".onSuggestionItemSelectedProperty"
+                                    >
+										<suggestionColumns>
+											<Column>
+												<Label text="Property" />
+											</Column>
+											<Column>
+												<Label text="Name" />
+											</Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<Label text="{Code}" />
+												<Label text="{Name}" />
+											</ColumnListItem>
+										</suggestionRows>
+									</Input>
+								
+		                            <Input id="selectedKeyIndicator" value="{local>/program}" visible="true"
+		                            placeholder="Program"
+		                            >
+		                            </Input>	
+									<ToolbarSpacer/>
+									<Button text="{i18n>AddItemButtonText}"  id="btnAddItem" icon="sap-icon://add" press="onAddItem" visible="true" class="sapUiResponsiveMargin"/>
+									<Button text="{i18n>refreshButtonText}" id="btnRefresh" icon="sap-icon://refresh" press="onRefresh"/>
+									<Button text="{i18n>saveButtonText}"  id="btnSubmit" icon="sap-icon://save" press="onSubmit" visible="true" class="sapUiResponsiveMargin"/>
+								</content>
+							</OverflowToolbar>-->
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Desktop" visible="true">
+								<Text text="{i18n>user}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>userName}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>ladder}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>role}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>property}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>program}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>enabled}"/>
+							</Column>
+							<Column minScreenWidth="Desktop">
+								<Text text="{i18n>expires}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Input value="{path: 'U_UserCode',targetType: 'any'}" editable="false"  />
+									<Input value="{path: 'U_UserName',targetType: 'any'}" editable="false" />
+									<Input value="{path: 'U_Ladder',targetType: 'any'}" editable="true" />
+									<Input value="{path: 'U_Role',targetType: 'any'}" editable="true" />
+									<Input value="{path: 'U_Property',targetType: 'any'}" editable="true" />
+									<Input value="{path: 'U_Program',targetType: 'any'}" editable="true" />
+									<Select id="Expires" selectedKey="{path: 'U_Enabled',targetType: 'any'}" editable="true">
+									<items>
+											<core:Item text="Yes" key="Y"/>
+											<core:Item text="No" key="N"/>
+										</items>
+									</Select>
+									<DatePicker value="{path: 'U_Expires',targetType: 'any'}" editable="true" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Button text="{i18n>deleteButtonText}"  id="btnDelete" icon="sap-icon://delete" press="onDelete" visible="true" class="sapUiResponsiveMargin"/>
+				</Panel>
+			</ScrollContainer>
+		</content>
+		<footer>
+			<Toolbar>
+				<Button press="onNavLogout" text="Logout"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+				<ToolbarSpacer/>
+				<Button press="onNavHome" text="Home"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

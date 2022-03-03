@@ -1,0 +1,69 @@
+<mvc:View controllerName="K2PPM_PM.controller.Login"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page class="sapUiResponsiveContentPadding k2pPage" id="thisPage">
+		<customHeader>
+			<Toolbar>
+				<Image src="./images/logoSmall.png" width="30px"  id="image0" tooltip="icon"/>
+				<ToolbarSpacer/>
+				<Text text="{i18n>loginPageTitle}" class="sapUiResponsiveContentPadding"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<Panel class="sapUiResponsiveMargin  k2pPanel" width="800px">
+				<content>
+					<l:VerticalLayout>
+						<l:HorizontalLayout>
+							<!-- key2-logo.svg Key2Small2.JPG LookoutLogo.JPG height="140px" -->
+						</l:HorizontalLayout>
+						<l:VerticalLayout>
+							<Text text="{i18n>company}" id="__text15" class="sapUiResponsiveMargin" width="auto"/>
+							<ComboBox selectedItem="JCS" id="cmbCompanyDB" value="{local>/B1CompanyDB}" class="sapUiResponsiveMargin" width="auto" enabled="true">
+								<items>
+									<core:Item text="SAP_LOOKOUT" key="SAP_LOOKOUT"/>
+									<core:Item text="SAP_LOOKOUT_SANDBOX_FEB_2022" key="SAP_LOOKOUT_SANDBOX_FEB_2022"/>
+								</items>
+							</ComboBox>
+						</l:VerticalLayout>
+						<l:VerticalLayout>
+							<l:content>
+								<Text
+									xmlns="sap.m" text="{i18n>user}" id="text0" class="sapUiResponsiveMargin"/>
+									<Input id="inpUser" valueLiveUpdate="true" width="auto" enabled="true" value="{local>/B1UserName}" class="sapUiResponsiveMargin"/>
+									<!--<Inputxmlns="sap.m" value="" id="input0" class="sapUiResponsiveMargin"/>-->
+								</l:content>
+							</l:VerticalLayout>
+							<l:VerticalLayout>
+								<l:content>
+									<Text
+										xmlns="sap.m" text="{i18n>password}" id="text1" class="sapUiResponsiveMargin"/>
+										<HBox>
+											<Input id="inpPassword" valueLiveUpdate="true" width="auto" enabled="true" type="Password" value="{local>/B1Password}"
+									class="sapUiResponsiveMargin"/>
+										</HBox>
+										<!--<Inputxmlns="sap.m" value="" id="input1" class="sapUiResponsiveMargin" type="Password"/>-->
+									</l:content>
+									<l:VerticalLayout>
+										<!--<Button text="{i18n>login}" width="200px" id="btnLogin" icon="sap-icon://activities" visible="True"/>-->
+										<Button id="btnLogin" text="{i18n>login}" width="200px" icon="sap-icon://activate" press="slLoginButton" class="sapUiResponsiveMargin k2pTile"/>
+									</l:VerticalLayout>
+								</l:VerticalLayout>
+							</l:VerticalLayout>
+						</content>
+					</Panel>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Text text="{i18n>appTitle}" class="sapUiResponsiveContentPadding "/>
+						<ToolbarSpacer/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</mvc:View>

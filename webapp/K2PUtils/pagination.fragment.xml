@@ -1,0 +1,7 @@
+<FlexBox id="navBox" visible="true"  xmlns="sap.m">
+	<Text text="{qParams>/pageCountText}"/>
+	<Button id="btnFirst" icon="sap-icon://media-rewind" press="fetchFirst" tooltip="icon" class="k2pTile sapUiSmallMarginBegin"/>
+	<Button id="btnNext" icon="sap-icon://arrow-left" press="fetchPrevious" tooltip="icon" class="k2pTile"/>
+	<Button id="btnPrevious" icon="sap-icon://arrow-right" press="fetchNext" tooltip="icon" class="k2pTile"/>
+	<Button id="btnLast" icon="sap-icon://media-forward" press="fetchLast" tooltip="icon" class="k2pTile"/>
+</FlexBox>

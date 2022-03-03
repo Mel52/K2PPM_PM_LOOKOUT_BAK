@@ -1,0 +1,59 @@
+<mvc:View
+	controllerName="K2PPM_PM.controller.Statement"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	busyIndicatorDelay="0"
+	>
+	<Page id="statementPage" title="{i18n>Statement}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+		<Panel id="pnlStatement" class="sapUiResponsiveMargin" width="auto" visible="true" headerText="{i18n>OpenItems}">
+				<Table id="idStatementTable" inset="false" mode="MultiSelect" selectionChange="onInvoiceSelectionChange" items="{ path: '/value', sorter: { path: 'DocNum' } }">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="Items" level="H2"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="12em">
+							<Text text="Doc#"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Customer"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Amount Due"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Amount To Pay"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Description"/>
+						</Column>
+						<Column minScreenWidth="Tablet">
+							<Text text="Due Date"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{DocNum}"/>
+								<Text text="{CardCode}"/>
+								<Text text="{DocTotal}"/>
+								<Input value="{U_JC1_Amount}" change="resetPmtTotal"/>
+								<Text text="{Comments}"/>
+								<Text text="{DocDueDate}"/>
+
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Button text="Pay Now" width="200px" id="btnPayNow" icon="sap-icon://activities" visible="false"/>
+			</Panel>
+
+		</content>
+	</Page>
+</mvc:View>
